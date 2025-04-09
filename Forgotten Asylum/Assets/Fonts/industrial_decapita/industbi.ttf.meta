@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: aee72c18420bddb44b9dc4e898492c9b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Industrial Decapitalist
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 083b5476b27875543a2b55b93ba93cc6, type: 3}
+  - {fileID: 12800000, guid: 8e06bb9798b0a454fa5180c6dc2069ca, type: 3}
+  - {fileID: 12800000, guid: a30d843cfc74d094bb3518555ddb1c31, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ObjectData
 {
-    [SerializeField] Sprite hotbarImage;
-    [SerializeField] string objectName;
-    [SerializeField] GameObject defaultObject;
+    [SerializeField] public Sprite hotbarImage;
+    [SerializeField] public string objectName;
+    [SerializeField] public GameObject defaultObject;
 }
 public class ObjectPickupClass : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class ObjectPickupClass : MonoBehaviour
         Debug.Log("Pickup");
         if (FindObjectOfType<InventoryScript>().AddToInventory(inventoryData))
         { 
+            
             Destroy(gameObject.transform.parent.gameObject);
         }
         

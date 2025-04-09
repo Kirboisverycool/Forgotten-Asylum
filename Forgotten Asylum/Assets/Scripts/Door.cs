@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
-
+   
     bool isLockedDoor;
     public bool isInRange;
     [SerializeField] string roomName;
-    
+    [SerializeField] string unlockedItemName;
 
     void Start()
     {
@@ -26,7 +26,10 @@ public class Door : MonoBehaviour
             }
             else 
             {
-                
+                if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
+                {
+                    SceneManager.LoadScene(roomName);
+                }
             }
         }
 
