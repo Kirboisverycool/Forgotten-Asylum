@@ -8,20 +8,26 @@ public class PlayerMouvement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 movementInputs;
 
+    [Header("Speeds")]
     [SerializeField] float movementSpeed;
     [SerializeField] float sprintMultiplier = 1f;
-
+    [Header("Stamina")]
     [SerializeField] float stamina = 100f;
     [SerializeField] float removeStaminaRate= 0.1f;
     [SerializeField] float addStaminaCoolDown = 3;
     [SerializeField] float timeSinceLastSprinted = 0;
-
+    [Header("UI")]
     [SerializeField] GameObject staminaBar;
     Image staminaFillBar;
-    
     bool isRemovingStamina = false;
     bool isAddingStamina = false;
-   
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip groundSoundClip;
+    public void GroundSoundChange(AudioClip audioClip)
+    {
+        groundSoundClip = audioClip;
+    }
     void Start()
     {
       rb = GetComponent<Rigidbody2D>();
@@ -45,7 +51,10 @@ public class PlayerMouvement : MonoBehaviour
                 StartCoroutine(AddStamina());
             }
         }
-        
+        if (rb.velocity.magnitude > 0.05f)
+        { 
+            
+        }
 
     }
 

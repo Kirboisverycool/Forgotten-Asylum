@@ -13,6 +13,7 @@ public class KeyPad : MonoBehaviour
     void Start()
     {
         codeText = "";
+        UpdateDisplay();
     }
     public void pressButton(int num)
     {
@@ -21,8 +22,8 @@ public class KeyPad : MonoBehaviour
             codeText += num.ToString();
             UpdateDisplay();
             if (codeText.Length == 4)
-            { 
-                        
+            {
+                CheckIfCorrect(codeText);
             }
         }
     }
@@ -33,17 +34,31 @@ public class KeyPad : MonoBehaviour
     private void CheckIfCorrect(string codeTested)
     {
         if (codeTested == correctCode.ToString())
-        { 
-            
+        {
+            Debug.Log("CorrectCode");
+            StartCoroutine(CorrectCode());
+        }
+        else
+        {
+            Debug.Log("Incorect");
+            StartCoroutine(WrongCode());
+
         }
     }
-    public void CloseTab()
-    { 
-        
-    }
-    // Update is called once per frame
-    void Update()
+    IEnumerator WrongCode()
     {
-        
+        yield return new WaitForSeconds(1);
+        codeText = "";
+        UpdateDisplay();
+    }
+    IEnumerator CorrectCode()
+    {
+        yield return new WaitForSeconds(1);
+        CloseTab();
+        //DoActionFromCode
+    }
+    public void CloseTab()
+    {
+        Destroy(gameObject);
     }
 }
