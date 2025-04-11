@@ -5,7 +5,8 @@ using UnityEngine;
 public class FloorSoundArea : MonoBehaviour
 {
     [SerializeField] AudioClip audioClip;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
