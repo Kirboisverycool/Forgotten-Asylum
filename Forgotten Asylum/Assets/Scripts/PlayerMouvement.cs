@@ -11,26 +11,32 @@ public class PlayerMouvement : MonoBehaviour
     [Header("Speeds")]
     [SerializeField] float movementSpeed;
     [SerializeField] float sprintMultiplier = 1f;
+
     [Header("Stamina")]
     [SerializeField] float stamina = 100f;
     [SerializeField] float removeStaminaRate= 0.1f;
     [SerializeField] float addStaminaCoolDown = 3;
     [SerializeField] float timeSinceLastSprinted = 0;
-    [Header("UI")]
-    [SerializeField] GameObject staminaBar;
-    Image staminaFillBar;
     bool isRemovingStamina = false;
     bool isAddingStamina = false;
 
+    [Header("UI")]
+    [SerializeField] GameObject staminaBar;
+    Image staminaFillBar;
+
+
     [Header("Sounds")]
     [SerializeField] AudioClip groundSoundClip;
+    AudioSource aSource;
     public void GroundSoundChange(AudioClip audioClip)
     {
         groundSoundClip = audioClip;
+        aSource.clip = groundSoundClip;
     }
     void Start()
     {
-      rb = GetComponent<Rigidbody2D>();
+        aSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
         staminaBar.SetActive(false);
         staminaFillBar = staminaBar.transform.GetChild(1).GetComponent<Image>();
     }
@@ -51,9 +57,15 @@ public class PlayerMouvement : MonoBehaviour
                 StartCoroutine(AddStamina());
             }
         }
-        if (rb.velocity.magnitude > 0.05f)
-        { 
-            
+        Debug.Log(rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 0.01f)
+        {
+            aSource.Play();
+            Debug.Log("audio");
+        }
+        else
+        {
+            aSource.Stop();
         }
 
     }
