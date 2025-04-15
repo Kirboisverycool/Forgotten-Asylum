@@ -48,6 +48,10 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isInRange = false;
+        if (collision.CompareTag("Player"))
+        {
+            isInRange = false;
+        }
+    
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.PostProcessing.HistogramMonitor;
 
 public class PlayerMouvement : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class PlayerMouvement : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] AudioClip groundSoundClip;
     AudioSource aSource;
+
+    [Header("Animations")]
+    [SerializeField] string boolFoward;
+    [SerializeField] string boolBackward;
+    [SerializeField] string boolLeft;
+    [SerializeField] string boolRight;
+    string currentBoolDir = null;
+    Animator anim;
     public void GroundSoundChange(AudioClip audioClip)
     {
         groundSoundClip = audioClip;
@@ -35,6 +44,7 @@ public class PlayerMouvement : MonoBehaviour
     }
     void Start()
     {
+        anim = GetComponent<Animator>();
         aSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         staminaBar.SetActive(false);
@@ -46,6 +56,9 @@ public class PlayerMouvement : MonoBehaviour
     {
         MouvementInputs();
         Sprint();
+        MoveAudio();
+        currentBoolDir = MouvementDir();
+        Animations();
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -57,19 +70,43 @@ public class PlayerMouvement : MonoBehaviour
                 StartCoroutine(AddStamina());
             }
         }
-        Debug.Log(rb.velocity.magnitude);
-        if (rb.velocity.magnitude > 0.01f)
+
+    }
+    private void Animations()
+    {
+        if (currentBoolDir != null)
+        { 
+            anim.SetBool(currentBoolDir, true);
+            
+        }
+    }
+    private string MouvementDir()
+    {
+        float x = rb.velocity.x;
+        float y = rb.velocity.y;
+
+        if (x > 0) { return boolLeft; }
+        else if (x < 0) { return boolRight; }
+        else if (y > 0) { return boolBackward; }
+        else if (y < 0) { return boolFoward; }
+        else return null;}
+    private void MoveAudio()
+    {
+        if (rb.velocity.magnitude > 0)
         {
-            aSource.Play();
-            Debug.Log("audio");
+            if (!aSource.isPlaying)
+            {
+                aSource.Play();
+                Debug.Log("audio");
+            }
         }
         else
         {
             aSource.Stop();
+
+
         }
-
     }
-
     private void FixedUpdate()
     {
         Move();
@@ -120,8 +157,6 @@ public class PlayerMouvement : MonoBehaviour
         yield return new WaitForSeconds(removeStaminaRate);
         isAddingStamina = false;
     }
-
-
     private void MouvementInputs()
     {
         float InputX = Input.GetAxisRaw("Horizontal");
