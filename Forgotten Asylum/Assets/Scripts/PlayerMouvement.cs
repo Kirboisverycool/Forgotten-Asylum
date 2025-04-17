@@ -35,7 +35,6 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] string boolBackward;
     [SerializeField] string boolLeft;
     [SerializeField] string boolRight;
-    string currentBoolDir = null;
     Animator anim;
     public void GroundSoundChange(AudioClip audioClip)
     {
@@ -57,8 +56,8 @@ public class PlayerMouvement : MonoBehaviour
         MouvementInputs();
         Sprint();
         MoveAudio();
-        currentBoolDir = MouvementDir();
-        Animations();
+        MouvementDir();
+       
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -72,24 +71,31 @@ public class PlayerMouvement : MonoBehaviour
         }
 
     }
-    private void Animations()
+    private void Animation(string s, bool state)
     {
-        if (currentBoolDir != null)
-        { 
-            anim.SetBool(currentBoolDir, true);
-            
-        }
+            anim.SetBool(s, state);                  
     }
-    private string MouvementDir()
+    private void MouvementDir()
     {
         float x = rb.velocity.x;
         float y = rb.velocity.y;
 
-        if (x > 0) { return boolLeft; }
-        else if (x < 0) { return boolRight; }
-        else if (y > 0) { return boolBackward; }
-        else if (y < 0) { return boolFoward; }
-        else return null;}
+        if (x < 0) { Animation(boolLeft,true); }
+        else if (anim.GetBool(boolLeft) && x>=0) { Animation(boolLeft, false); }
+
+        if (x > 0) { Animation(boolRight,true); }
+        else if (anim.GetBool(boolRight) && x <= 0) { Animation(boolRight, false); }
+
+        if (y > 0) { Animation(boolBackward,true); }
+        else if (anim.GetBool(boolBackward) && y <= 0) { Animation(boolBackward, false); }
+
+        if (y < 0) { Animation(boolFoward,true); }
+        else if (anim.GetBool(boolFoward) && y >= 0) { Animation(boolFoward, false); }
+        //else if ()
+
+
+
+    }
     private void MoveAudio()
     {
         if (rb.velocity.magnitude > 0)
@@ -134,9 +140,10 @@ public class PlayerMouvement : MonoBehaviour
     {
         float currentFillAmmount = staminaFillBar.fillAmount;
         float fillAmmount = stamina / 100;
-   
-   
-        staminaFillBar.fillAmount = Mathf.Lerp(currentFillAmmount, fillAmmount, 0.5f);
+
+
+        staminaFillBar.fillAmount = fillAmmount; 
+            //Mathf.Lerp(currentFillAmmount, fillAmmount, 0.1f);
     }
     IEnumerator RemoveStamina()
     {

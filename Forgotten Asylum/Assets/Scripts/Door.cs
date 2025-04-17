@@ -9,16 +9,17 @@ public class Door : MonoBehaviour
     public bool isInRange;
     [SerializeField] string roomName;
     [SerializeField] string unlockedItemName;
-
+    [SerializeField] KeyCode keyboardKey;
+    [SerializeField] GameObject text;
     void Start()
     {
-        
+        text.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isInRange && Input.GetKeyDown(KeyCode.E))
+        if (isInRange && Input.GetKeyDown(keyboardKey))
         {
             if (!isLockedDoor)
             {
@@ -44,6 +45,7 @@ public class Door : MonoBehaviour
         if (collision.CompareTag("Player"))
         { 
             isInRange = true;
+            text.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -51,6 +53,7 @@ public class Door : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isInRange = false;
+            text.SetActive(false);
         }
     
     }

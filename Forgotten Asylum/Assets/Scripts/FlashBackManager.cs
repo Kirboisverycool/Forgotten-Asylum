@@ -20,8 +20,14 @@ public class FlashBackManager : MonoBehaviour
     }
     public void SetPassed()
     {
-        PresentTime.SetActive(false);
         PastTime.SetActive(true);
+        PresentTime.SetActive(false);
+   
+    }
+    public void SetCurrent()
+    {
+        PresentTime.SetActive(true);
+        PastTime.SetActive(false);
     }
     public void SwitchTime()
     {
