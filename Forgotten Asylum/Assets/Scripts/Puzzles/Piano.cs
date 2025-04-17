@@ -13,6 +13,8 @@ public class Piano : MonoBehaviour
     [SerializeField] int finalDigit;
 
     [SerializeField] bool finishedPuzzle = false;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
 
     public void PressButton(int num)
     {
@@ -26,11 +28,6 @@ public class Piano : MonoBehaviour
                 CheckIfCorrect();
             }
         }
-    }
-
-    public void PlaySound(AudioClip audioClip)
-    {
-        //play sound
     }
 
     private void CheckIfCorrect()
@@ -55,7 +52,7 @@ public class Piano : MonoBehaviour
     }
     IEnumerator WrongCode()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         codeText.Clear();
         currentNumber = -1;
         Debug.Log("incorrect");
