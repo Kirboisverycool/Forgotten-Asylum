@@ -11,6 +11,7 @@ public class Door : MonoBehaviour
     [SerializeField] string unlockedItemName;
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject text;
+    [SerializeField] float delayTime;
     void Start()
     {
         text.SetActive(false);
@@ -23,13 +24,14 @@ public class Door : MonoBehaviour
         {
             if (!isLockedDoor)
             {
-                SceneManager.LoadScene(roomName);
+                openDoor();
+            
             }
             else 
             {
                 if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
                 {
-                    SceneManager.LoadScene(roomName);
+                    openDoor();
                 }
             }
         }
@@ -38,8 +40,15 @@ public class Door : MonoBehaviour
     }
     private void openDoor()
     { 
-    
+        GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
+        StartCoroutine(DelayLoad());
     }
+    IEnumerator DelayLoad()
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(roomName);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

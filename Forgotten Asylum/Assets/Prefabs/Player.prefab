@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2062189146803732868}
   - component: {fileID: 8131817098055949693}
   - component: {fileID: 7679338216090217116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!114 &6223360690118031465
 MonoBehaviour:
@@ -123,14 +123,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7211672596472772244}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,7 +141,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &2847493654504595239
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   - {x: -0.014195085, y: -0.21784794, z: 0}
   m_ShapePathHash: -25845341
   m_Mesh: {fileID: 0}
-  m_InstanceId: 28986
+  m_InstanceId: -87474
   m_LocalBounds:
     m_Center: {x: -0.007065475, y: -0.0059378445, z: 0}
     m_Extent: {x: 0.093853295, y: 0.21268895, z: 0}
