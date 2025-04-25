@@ -57,7 +57,7 @@ public class PlayerMouvement : MonoBehaviour
         Sprint();
         MoveAudio();
         MouvementDir();
-       
+        
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -73,7 +73,7 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void Animation(string s, bool state)
     {
-            anim.SetBool(s, state);                  
+        anim.SetBool(s, state);                  
     }
     private void MouvementDir()
     {
@@ -86,15 +86,11 @@ public class PlayerMouvement : MonoBehaviour
         if (x > 0) { Animation(boolRight,true); }
         else if (anim.GetBool(boolRight) && x <= 0) { Animation(boolRight, false); }
 
-        if (y > 0) { Animation(boolBackward,true); }
+        if (y > 0) { Animation(boolBackward, true); }
         else if (anim.GetBool(boolBackward) && y <= 0) { Animation(boolBackward, false); }
 
-        if (y < 0) { Animation(boolFoward,true); }
+            if (y < 0) { Animation(boolFoward,true); }
         else if (anim.GetBool(boolFoward) && y >= 0) { Animation(boolFoward, false); }
-        //else if ()
-
-
-
     }
     private void MoveAudio()
     {
@@ -103,7 +99,7 @@ public class PlayerMouvement : MonoBehaviour
             if (!aSource.isPlaying)
             {
                 aSource.Play();
-                Debug.Log("audio");
+                //Debug.Log("audio");
             }
         }
         else
@@ -168,6 +164,10 @@ public class PlayerMouvement : MonoBehaviour
     {
         float InputX = Input.GetAxisRaw("Horizontal");
         float InputY = Input.GetAxisRaw("Vertical");
+
+        anim.SetFloat("Horizontal", InputX);
+        anim.SetFloat("Vertical", InputY);
+        anim.SetFloat("Speed", movementInputs.sqrMagnitude);
 
         movementInputs = new Vector2(InputX, InputY).normalized;
     }
