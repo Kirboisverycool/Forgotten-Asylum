@@ -12,6 +12,11 @@ public class Interactables : MonoBehaviour
     public bool isNearest = false;
     CircleCollider2D rangeTrigger;
 
+    [SerializeField] SpriteRenderer sRenderer;
+    Sprite normalVersion;
+    [SerializeField] Sprite highlitedVerison;
+
+
 
     private void Update() 
     {
@@ -23,8 +28,14 @@ public class Interactables : MonoBehaviour
     }
     void Start()
     {
+      
         rangeTrigger = GetComponent<CircleCollider2D>();
         rangeTrigger.radius = range;
+
+        if (sRenderer != null)
+        {
+            normalVersion = sRenderer.sprite;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,15 +50,26 @@ public class Interactables : MonoBehaviour
         {
             FindObjectOfType<InteractManager>().RemoveFromList(gameObject);
             nearText.SetActive(false);
+            if (highlitedVerison != null)
+            {
+                sRenderer.sprite = normalVersion;
+            }
         }
     }
     public void IsNearest()
     {
+        if (highlitedVerison != null) { sRenderer.sprite = highlitedVerison; }
+    
         nearText.SetActive(true);
         isNearest = true;
     }
     public void NotNearest()
     {
+       
+        if(highlitedVerison != null)
+        {
+            sRenderer.sprite = normalVersion;
+        }
         nearText.SetActive(false);
         isNearest = false;
     }

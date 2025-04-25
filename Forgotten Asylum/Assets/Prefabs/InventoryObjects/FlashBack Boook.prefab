@@ -157,6 +157,8 @@ MonoBehaviour:
   interactKey: 101
   objectToTrigger: {fileID: 8416111599730760484}
   isNearest: 0
+  sRenderer: {fileID: 3497167177456439064}
+  highlitedVerison: {fileID: 21300000, guid: 9064ba56fee41b843a4e6322f2a57eaa, type: 3}
 --- !u!58 &1273952129520686686
 CircleCollider2D:
   m_ObjectHideFlags: 0

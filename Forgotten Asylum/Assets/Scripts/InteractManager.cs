@@ -25,7 +25,7 @@ public class InteractManager : MonoBehaviour
         {
             float distance = Vector2.Distance(interactables[i].gameObject.transform.position, transform.position);
             if (distance < nearestDistance)
-            { 
+            {
                 nearestDistance = distance;
                 nearestObject = interactables[i];
             }
