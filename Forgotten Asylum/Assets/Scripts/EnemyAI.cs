@@ -1,77 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
-using Pathfinding;
-using System;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] Transform target;
-
-    [SerializeField] float speed;
-    [SerializeField] float nextWaypointDistance = 3f;
-
-    Path path;
-    int currentWaypoint;
-    bool reachedEndOfPath = false;
-
-    Seeker seeker;
+    Transform target;
     Rigidbody2D rb;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
+    Vector2 moveDir;
 
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+    [SerializeField] float speed;
+    [SerializeField] float updatePathTime;
+    [SerializeField] float lineOfSite;
+
+    float distanceFromPlayer;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if(distanceFromPlayer < lineOfSite)
+        {
+            InvokeRepeating("UpdatePath", 0f, updatePathTime);
+        }
     }
 
     void UpdatePath()
     {
-        if(seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-        }
-    }
-
-    private void OnPathComplete(Path p)
-    {
-        if(!p.error)
-        {
-            path = p;
-            currentWaypoint = 0;
-        }
+        Vector3 direction = (target.position - transform.position).normalized;
+        moveDir = direction;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(path == null)
-        {
-            return;
-        }
+        rb.velocity = new Vector2(moveDir.x, moveDir.y) * speed;
+    }
 
-        if(currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-        if(distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, lineOfSite);
     }
 }

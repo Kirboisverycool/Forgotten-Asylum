@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+//using UnityEngine.Windows;
 using static UnityEngine.Rendering.PostProcessing.HistogramMonitor;
 
 public class PlayerMouvement : MonoBehaviour
@@ -18,6 +21,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float removeStaminaRate= 0.1f;
     [SerializeField] float addStaminaCoolDown = 3;
     [SerializeField] float timeSinceLastSprinted = 0;
+    [SerializeField] bool isMoving = false;
     bool isRemovingStamina = false;
     bool isAddingStamina = false;
 
@@ -31,11 +35,9 @@ public class PlayerMouvement : MonoBehaviour
     AudioSource aSource;
 
     [Header("Animations")]
-    [SerializeField] string boolFoward;
-    [SerializeField] string boolBackward;
-    [SerializeField] string boolLeft;
-    [SerializeField] string boolRight;
     Animator anim;
+    Vector2 lastMoveDirection;
+
     public void GroundSoundChange(AudioClip audioClip)
     {
         groundSoundClip = audioClip;
@@ -56,7 +58,8 @@ public class PlayerMouvement : MonoBehaviour
         MouvementInputs();
         Sprint();
         MoveAudio();
-        MouvementDir();
+        Animate();
+        //MouvementDir();
         
 
         Mathf.Clamp(stamina, 0, 100);
@@ -69,29 +72,29 @@ public class PlayerMouvement : MonoBehaviour
                 StartCoroutine(AddStamina());
             }
         }
-
+        if (!isRemovingStamina && stamina >= 100)
+        {
+            staminaBar.SetActive(false);
+            //StartCoroutine(HideStamindaBar());
+        }
     }
-    private void Animation(string s, bool state)
+
+    IEnumerator HideStamindaBar()
     {
-        anim.SetBool(s, state);                  
+        yield return new WaitForSeconds(2);
+
+        staminaBar.SetActive(false);
     }
-    private void MouvementDir()
+
+    private void Animate()
     {
-        float x = rb.velocity.x;
-        float y = rb.velocity.y;
-
-        if (x < 0) { Animation(boolLeft,true); }
-        else if (anim.GetBool(boolLeft) && x>=0) { Animation(boolLeft, false); }
-
-        if (x > 0) { Animation(boolRight,true); }
-        else if (anim.GetBool(boolRight) && x <= 0) { Animation(boolRight, false); }
-
-        if (y > 0) { Animation(boolBackward, true); }
-        else if (anim.GetBool(boolBackward) && y <= 0) { Animation(boolBackward, false); }
-
-            if (y < 0) { Animation(boolFoward,true); }
-        else if (anim.GetBool(boolFoward) && y >= 0) { Animation(boolFoward, false); }
+        anim.SetFloat("Horizontal", movementInputs.x);
+        anim.SetFloat("Vertical", movementInputs.y);
+        anim.SetFloat("Speed", movementInputs.sqrMagnitude);
+        anim.SetFloat("LastHorizontal", lastMoveDirection.x);
+        anim.SetFloat("LastVertical", lastMoveDirection.y);
     }
+
     private void MoveAudio()
     {
         if (rb.velocity.magnitude > 0)
@@ -105,8 +108,6 @@ public class PlayerMouvement : MonoBehaviour
         else
         {
             aSource.Stop();
-
-
         }
     }
     private void FixedUpdate()
@@ -115,13 +116,12 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void Sprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && isMoving)
         {
             staminaBar.SetActive(true);
             sprintMultiplier = stamina/100 + 1;
             if (!isRemovingStamina)
-            {
-                
+            {   
                 StartCoroutine(RemoveStamina());
             }
         } 
@@ -165,9 +165,19 @@ public class PlayerMouvement : MonoBehaviour
         float InputX = Input.GetAxisRaw("Horizontal");
         float InputY = Input.GetAxisRaw("Vertical");
 
-        anim.SetFloat("Horizontal", InputX);
-        anim.SetFloat("Vertical", InputY);
-        anim.SetFloat("Speed", movementInputs.sqrMagnitude);
+        if ((InputX == 0 && InputY == 0) && (movementInputs.x != 0 || movementInputs.y != 0))
+        {
+            lastMoveDirection = movementInputs;
+        }
+
+        if(movementInputs.sqrMagnitude > 0.01)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }    
 
         movementInputs = new Vector2(InputX, InputY).normalized;
     }
