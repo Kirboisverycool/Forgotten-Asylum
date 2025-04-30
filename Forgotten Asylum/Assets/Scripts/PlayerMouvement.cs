@@ -43,6 +43,7 @@ public class PlayerMouvement : MonoBehaviour
         groundSoundClip = audioClip;
         aSource.clip = groundSoundClip;
     }
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -59,7 +60,6 @@ public class PlayerMouvement : MonoBehaviour
         Sprint();
         MoveAudio();
         Animate();
-        //MouvementDir();
         
 
         Mathf.Clamp(stamina, 0, 100);
@@ -75,15 +75,7 @@ public class PlayerMouvement : MonoBehaviour
         if (!isRemovingStamina && stamina >= 100)
         {
             staminaBar.SetActive(false);
-            //StartCoroutine(HideStamindaBar());
         }
-    }
-
-    IEnumerator HideStamindaBar()
-    {
-        yield return new WaitForSeconds(2);
-
-        staminaBar.SetActive(false);
     }
 
     private void Animate()
@@ -110,10 +102,12 @@ public class PlayerMouvement : MonoBehaviour
             aSource.Stop();
         }
     }
+
     private void FixedUpdate()
     {
         Move();
     }
+
     private void Sprint()
     {
         if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && isMoving)
@@ -141,6 +135,7 @@ public class PlayerMouvement : MonoBehaviour
         staminaFillBar.fillAmount = fillAmmount; 
             //Mathf.Lerp(currentFillAmmount, fillAmmount, 0.1f);
     }
+
     IEnumerator RemoveStamina()
     {
         timeSinceLastSprinted = 0;
@@ -151,6 +146,7 @@ public class PlayerMouvement : MonoBehaviour
         yield return new WaitForSeconds(removeStaminaRate);
         isRemovingStamina=false;
     }
+
     IEnumerator AddStamina()
     {
         isAddingStamina=true;
@@ -160,6 +156,7 @@ public class PlayerMouvement : MonoBehaviour
         yield return new WaitForSeconds(removeStaminaRate);
         isAddingStamina = false;
     }
+
     private void MouvementInputs()
     {
         float InputX = Input.GetAxisRaw("Horizontal");
@@ -184,6 +181,5 @@ public class PlayerMouvement : MonoBehaviour
     private void Move()
     {
         rb.velocity = new Vector2(movementInputs.x * movementSpeed * sprintMultiplier, movementInputs.y * movementSpeed * sprintMultiplier);
-
     }
 }
