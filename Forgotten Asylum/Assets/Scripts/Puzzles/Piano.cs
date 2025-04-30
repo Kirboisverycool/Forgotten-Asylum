@@ -13,8 +13,8 @@ public class Piano : MonoBehaviour
     [SerializeField] int finalDigit;
 
     [SerializeField] bool finishedPuzzle = false;
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip audioClip;
+/*    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;*/
 
     public void PressButton(int num)
     {
