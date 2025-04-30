@@ -5,6 +5,9 @@ using UnityEngine;
 public class FlashBackManager : MonoBehaviour
 {
     bool isInPastTime = false;
+    [SerializeField] AudioClip flashBackSound;
+    [SerializeField] AudioClip returnSound;
+    [SerializeField] GameObject fadeParent;
     [SerializeField] GameObject PresentTime;
     [SerializeField] GameObject PastTime;
     // Start is called before the first frame update
@@ -20,14 +23,24 @@ public class FlashBackManager : MonoBehaviour
     }
     public void SetPassed()
     {
+        fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
+        AudioSource.PlayClipAtPoint(flashBackSound, Camera.main.transform.position);
         PastTime.SetActive(true);
         PresentTime.SetActive(false);
-   
+        StartCoroutine(ResetAnimation());
     }
     public void SetCurrent()
     {
+        fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
+        AudioSource.PlayClipAtPoint(returnSound, Camera.main.transform.position);
         PresentTime.SetActive(true);
         PastTime.SetActive(false);
+        StartCoroutine(ResetAnimation());
+    }
+    private IEnumerator ResetAnimation()
+    {
+        yield return new WaitForSeconds(2);
+        fadeParent.GetComponent<Animator>().ResetTrigger("FlashFade");
     }
     public void SwitchTime()
     {

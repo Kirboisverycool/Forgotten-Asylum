@@ -20,7 +20,7 @@ public class PostProccesingInteracting : MonoBehaviour
         dof.active = state;
         for(int i =0; i < uiToHide.Count; i ++) 
         {
-            uiToHide[i].SetActive(state);
+            uiToHide[i].SetActive(!state);
         }
 
     }

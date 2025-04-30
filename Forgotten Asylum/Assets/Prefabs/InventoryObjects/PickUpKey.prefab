@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dde1ca7b24215e45bed0e4d1faefee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 063c4d599bda9294c808d3a4f3acdd95, type: 3}
   inventoryData:
     hotbarImage: {fileID: 21300000, guid: d3d59ad293064c540b64c00f394dd6ea, type: 3}
     objectName: Key
@@ -456,7 +457,7 @@ Transform:
   - {fileID: 8735281427468263571}
   - {fileID: 404583712623590864}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1987707483537712253
 SpriteRenderer:
