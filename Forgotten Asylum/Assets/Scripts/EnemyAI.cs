@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,25 +12,33 @@ public class EnemyAI : MonoBehaviour
 
     Vector2 moveDir;
 
+    [Header("Attack")]
+    [SerializeField] float attackThrust;
+    [SerializeField] float slowDown;
+    [SerializeField] float attackDuration;
+    [SerializeField] float attackDelay;
+    [SerializeField] float timeToRecover;
+    [SerializeField] float attackCooldown;
+    bool isAttacking = false;
+    float cooldownTimer;
+
+    [Header("Collider")]
+    [SerializeField] float colliderLength;
+    [SerializeField] float colliderHeight;
+    [SerializeField] float colliderDistance;
+    [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] LayerMask playerLayer;
+
+    [Header("Movement")]
     [SerializeField] float speed;
+
+    [Header("Target Location")]
     [SerializeField] float updatePathTime;
-    [SerializeField] float lineOfSite;
-
-    [SerializeField] GameObject raycastLength;
-
-    [SerializeField] bool isInRange = false;
-
-    float distanceFromPlayer;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
-/*        if(distanceFromPlayer < lineOfSite)
-        {
-            InvokeRepeating("UpdatePath", 0f, updatePathTime);
-        }*/
     }
 
     void UpdatePath()
@@ -38,35 +47,60 @@ public class EnemyAI : MonoBehaviour
         moveDir = direction;
     }
 
+    // Update is called once per frame
     private void Update()
     {
         UpdatePath();
-    }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //rb.velocity = new Vector2(moveDir.x, moveDir.y) * speed;
-
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, raycastLength.transform.position - transform.position);
-
-        if(ray.collider != null)
+        if(!isAttacking)
         {
-            isInRange = ray.collider.CompareTag("Player");
-            if(isInRange)
+            cooldownTimer += Time.deltaTime;
+        }
+
+        if(PlayerInSight())
+        {
+            if(!isAttacking && cooldownTimer >= attackCooldown)
             {
-                Debug.DrawRay(transform.position, raycastLength.transform.position - transform.position, Color.green);
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, raycastLength.transform.position - transform.position, Color.red);
+                StartCoroutine(Attack());
             }
         }
     }
 
-/*    private void OnDrawGizmosSelected()
+    private IEnumerator Attack()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, lineOfSite);
-    }*/
+        isAttacking = true;
+        rb.velocity = Vector3.zero;
+        cooldownTimer = 0;
+        float originalDrag = rb.drag;
+        Vector3 currentTargetPosition = (target.position - transform.position).normalized;
+        yield return new WaitForSeconds(attackDelay);
+        rb.AddForce(currentTargetPosition * attackThrust, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(attackDuration);
+        rb.drag = slowDown;
+        yield return new WaitForSeconds(timeToRecover);
+        rb.drag = originalDrag;
+        isAttacking = false;
+    }
+
+    private bool PlayerInSight()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * colliderDistance, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z), 0, Vector2.left, 0, playerLayer);
+
+        return hit.collider != null;
+    }
+
+    void FixedUpdate()
+    {
+        if (!isAttacking)
+        {
+            rb.velocity = new Vector2(moveDir.x, moveDir.y) * speed;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * colliderDistance, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z));
+    }
 }
