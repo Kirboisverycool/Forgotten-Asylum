@@ -5,13 +5,23 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
    
-    bool isLockedDoor;
+
     public bool isInRange;
-    [SerializeField] string roomName;
+
+    [Header("Locked")]
+    [SerializeField] bool isLockedDoor;
     [SerializeField] string unlockedItemName;
+    
+    [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject text;
     [SerializeField] float delayTime;
+
+    [Header("Identifiers")]
+    [SerializeField] string roomName;
+    [SerializeField] public int DoorID;
+    [SerializeField] int doorToArrive;
+    [SerializeField] public GameObject spawnPoint;
     void Start()
     {
         text.SetActive(false);
