@@ -35,9 +35,14 @@ public class EnemyAI : MonoBehaviour
     [Header("Target Location")]
     [SerializeField] float updatePathTime;
 
+    [Header("Sprite")]
+    [SerializeField] bool isFacingLeft = false;
+    SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -50,6 +55,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        FlipSprite();
+
         UpdatePath();
 
         if(!isAttacking)
@@ -63,6 +70,20 @@ public class EnemyAI : MonoBehaviour
             {
                 StartCoroutine(Attack());
             }
+        }
+    }
+
+    private void FlipSprite()
+    {
+        if(rb.velocity.x < 0)
+        {
+            //spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }    
+        else if(rb.velocity.x > 0)
+        {
+            //spriteRenderer.flipX = false;
+            transform.localScale = Vector3.one;
         }
     }
 
@@ -84,7 +105,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool PlayerInSight()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * colliderDistance, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z), 0, Vector2.left, 0, playerLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * colliderDistance * transform.localScale.x, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z), 0, Vector2.left, 0, playerLayer);
 
         return hit.collider != null;
     }
@@ -101,6 +122,6 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.blue;
 
-        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * colliderDistance, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z));
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * colliderDistance * transform.localScale.x, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z));
     }
 }
