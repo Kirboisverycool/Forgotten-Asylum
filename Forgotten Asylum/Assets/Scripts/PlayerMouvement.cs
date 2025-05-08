@@ -9,8 +9,13 @@ using static UnityEngine.Rendering.PostProcessing.HistogramMonitor;
 
 public class PlayerMouvement : MonoBehaviour
 {
+    [Header("Movement")]
     Rigidbody2D rb;
     Vector2 movementInputs;
+
+    [Header("Puzzle")]
+    [SerializeField] bool isDoingPuzzle = false;
+    [SerializeField] GameObject[] puzzles;
 
     [Header("Speeds")]
     [SerializeField] float movementSpeed;
@@ -56,11 +61,15 @@ public class PlayerMouvement : MonoBehaviour
  
     void Update()
     {
-        MouvementInputs();
-        Sprint();
-        MoveAudio();
-        Animate();
-        
+        if(!isDoingPuzzle)
+        {
+            MouvementInputs();
+            Sprint();
+            MoveAudio();
+            Animate();
+        }
+
+        StopIfDoingPuzzle();
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -75,6 +84,25 @@ public class PlayerMouvement : MonoBehaviour
         if (!isRemovingStamina && stamina >= 100)
         {
             staminaBar.SetActive(false);
+        }
+    }
+
+    private void StopIfDoingPuzzle()
+    {
+        if (puzzles != null)
+        {
+            for (int i = 0; i < puzzles.Length; i++)
+            {
+                if (puzzles[i].activeInHierarchy)
+                {
+                    isDoingPuzzle = true;
+                    break;
+                }
+                else
+                {
+                    isDoingPuzzle = false;
+                }
+            }
         }
     }
 
@@ -105,7 +133,10 @@ public class PlayerMouvement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isDoingPuzzle)
+        {
+            Move();
+        }
     }
 
     private void Sprint()

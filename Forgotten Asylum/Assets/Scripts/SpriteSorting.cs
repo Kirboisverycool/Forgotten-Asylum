@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class SpriteSorting : MonoBehaviour
 {
-    SpriteMask mask;
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        mask = GetComponent<SpriteMask>();
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Feet")
         {
-            mask.frontSortingOrder = 1;
+            //mask.frontSortingOrder = 1;
+            spriteRenderer.sortingOrder = 1;
         }
     }
 
@@ -24,7 +25,7 @@ public class SpriteSorting : MonoBehaviour
     {
         if(collision.tag == "Feet")
         {
-            mask.frontSortingOrder = -1;
+            spriteRenderer.sortingOrder = -1;
         }
     }
 }

@@ -124,4 +124,18 @@ public class EnemyAI : MonoBehaviour
 
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * colliderDistance * transform.localScale.x, new Vector3(boxCollider.bounds.size.x * colliderLength, boxCollider.bounds.size.y * colliderHeight, boxCollider.bounds.size.z));
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            Jumpscare();
+        }
+    }
+
+    private void Jumpscare()
+    {
+        //play jumpscare
+        Debug.Log("play jumpscare");
+    }
 }
