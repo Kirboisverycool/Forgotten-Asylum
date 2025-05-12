@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     [SerializeField] float delayTime;
 
     [Header("Identifiers")]
-    [SerializeField] string roomName;
+    [SerializeField] string roomNameToGo;
     [SerializeField] public int DoorID;
     [SerializeField] int doorToArrive;
     [SerializeField] public GameObject spawnPoint;
@@ -49,14 +49,15 @@ public class Door : MonoBehaviour
 
     }
     private void openDoor()
-    { 
+    {
+        FindObjectOfType<SpawnPoints>().SetNextPoint(doorToArrive);
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
         StartCoroutine(DelayLoad());
     }
     IEnumerator DelayLoad()
     {
         yield return new WaitForSeconds(delayTime);
-        SceneManager.LoadScene(roomName);
+        SceneManager.LoadScene(roomNameToGo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

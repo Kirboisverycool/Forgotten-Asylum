@@ -43,6 +43,7 @@ public class PlayerMouvement : MonoBehaviour
     Animator anim;
     Vector2 lastMoveDirection;
 
+
     public void GroundSoundChange(AudioClip audioClip)
     {
         groundSoundClip = audioClip;
@@ -51,6 +52,14 @@ public class PlayerMouvement : MonoBehaviour
 
     void Start()
     {
+        SpawnPoints sp = FindObjectOfType<SpawnPoints>();
+        Debug.Log(sp);
+        if (sp.nextPoint != 0)
+        {
+            sp.FindSpawnPoint();
+        }
+     
+
         anim = GetComponent<Animator>();
         aSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();

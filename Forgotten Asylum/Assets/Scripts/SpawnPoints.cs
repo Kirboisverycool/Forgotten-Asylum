@@ -11,15 +11,21 @@ public class SpawnPoints : MonoBehaviour
         int numberOf = FindObjectsOfType<SpawnPoints>().Length;
         if (numberOf > 1)
         {
-
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else
         {
 
             DontDestroyOnLoad(gameObject);
+
+         
         }
+       
+
+
     }
+  
     public void SetNextPoint(int location)
     {
         nextPoint = location;
@@ -29,6 +35,7 @@ public class SpawnPoints : MonoBehaviour
     {
 
         Door[] doorLists = FindObjectsOfType<Door>();
+        Debug.Log(doorLists.Length);
 
         for (int i = 0; i <FindObjectsOfType<Door>().Length; i++)
         {
