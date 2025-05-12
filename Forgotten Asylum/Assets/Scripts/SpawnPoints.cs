@@ -18,12 +18,8 @@ public class SpawnPoints : MonoBehaviour
         {
 
             DontDestroyOnLoad(gameObject);
-
-         
+        
         }
-       
-
-
     }
   
     public void SetNextPoint(int location)
@@ -42,7 +38,7 @@ public class SpawnPoints : MonoBehaviour
             if (doorLists[i].DoorID == nextPoint)
             {
                 FindObjectOfType<PlayerMouvement>().transform.position = doorLists[i].spawnPoint.transform.position;
-
+                
             }
             
           

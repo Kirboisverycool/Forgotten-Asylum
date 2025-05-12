@@ -58,13 +58,13 @@ Transform:
   m_GameObject: {fileID: 1832684859710380164}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 2.598, y: -0.639, z: -1}
-  m_LocalScale: {x: 1.2, y: 0.3, z: 1.2}
+  m_LocalScale: {x: 1.2000003, y: 0.30000007, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5572790002593619208}
   - {fileID: 92316269685169523}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &5981901157618207472
 BoxCollider2D:
@@ -126,12 +126,15 @@ MonoBehaviour:
   isInRange: 0
   isLockedDoor: 0
   unlockedItemName: 
+  instructionText: {fileID: 6728033534040054826}
+  normalInstructions: 
+  lockedInstructions: F-LOCKED!
   keyboardKey: 102
   text: {fileID: 8656385731564786006}
   delayTime: 1
-  roomNameToGo: 
-  DoorID: 0
-  doorToArrive: 0
+  roomNameToGo: MainEntrance
+  DoorID: 4
+  doorToArrive: 3
   spawnPoint: {fileID: 6989238305345872}
 --- !u!1 &2382698687871528886
 GameObject:
@@ -169,7 +172,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.3988056, y: 0.06}
-  m_SizeDelta: {x: 3.65, y: 0.654}
+  m_SizeDelta: {x: 4.22, y: 0.654}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5270355046668252451
 CanvasRenderer:

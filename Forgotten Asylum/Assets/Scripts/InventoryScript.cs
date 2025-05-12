@@ -68,7 +68,15 @@ public class InventoryScript : MonoBehaviour
 
     public string HasItemInHand()
     {
-        return inventoryItemList[selectedSlot].objectName;          
+        if (inventoryItemList[selectedSlot] != null)
+        {
+            return inventoryItemList[selectedSlot].objectName;
+        }
+        else
+        {
+            return null;
+        }
+       
     }
     public bool AddToInventory(ObjectData data)
     {

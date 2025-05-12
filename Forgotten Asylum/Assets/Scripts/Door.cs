@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class Door : MonoBehaviour
 {
    
@@ -11,11 +12,15 @@ public class Door : MonoBehaviour
     [Header("Locked")]
     [SerializeField] bool isLockedDoor;
     [SerializeField] string unlockedItemName;
-    
+    [SerializeField] TextMeshProUGUI instructionText;
+    [SerializeField] string normalInstructions;
+    [SerializeField] string lockedInstructions;
+
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject text;
     [SerializeField] float delayTime;
+
 
     [Header("Identifiers")]
     [SerializeField] string roomNameToGo;
@@ -24,6 +29,12 @@ public class Door : MonoBehaviour
     [SerializeField] public GameObject spawnPoint;
     void Start()
     {
+        normalInstructions = instructionText.text;
+        if (isLockedDoor)
+        {
+            instructionText.color = Color.red;
+            instructionText.text = lockedInstructions;
+        }
         text.SetActive(false);
     }
 
@@ -34,14 +45,17 @@ public class Door : MonoBehaviour
         {
             if (!isLockedDoor)
             {
-                openDoor();
             
+                openDoor();
+
             }
             else 
             {
                 if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
                 {
-                    openDoor();
+                    instructionText.color = Color.white;
+                    instructionText.text = normalInstructions;
+                    isLockedDoor = false;
                 }
             }
         }
@@ -57,6 +71,7 @@ public class Door : MonoBehaviour
     IEnumerator DelayLoad()
     {
         yield return new WaitForSeconds(delayTime);
+        FindObjectOfType<FlashBackPersit>().GetFlashBackData();
         SceneManager.LoadScene(roomNameToGo);
     }
 

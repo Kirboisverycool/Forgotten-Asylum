@@ -15,18 +15,23 @@ public class FlashBackManager : MonoBehaviour
     [SerializeField] GameObject PresentTime;
     [SerializeField] GameObject PastTime;
     [Header("ReturnTimer")]
-    [SerializeField] int timeInPast;
+    [SerializeField] public int timeInPast;
     [SerializeField] GameObject returnTimerParent;
     [SerializeField] Image circleFill;
     [SerializeField] TextMeshProUGUI TimeleftText;
     //
-    bool isInPast;
+    public bool isInPast;
     float timeSinceArrived;
 
     // Start is called before the first frame update
     void Start()
     {
-        returnTimerParent.SetActive(false); 
+        returnTimerParent.SetActive(false);
+        if (FindObjectOfType<FlashBackPersit>().isInFlashBack == true)
+        {
+            LoadPast();
+        }
+      
     }
 
     // Update is called once per frame
@@ -63,6 +68,16 @@ public class FlashBackManager : MonoBehaviour
         StartCoroutine(ResetAnimation());
         
     }
+    public void LoadPast()
+    {
+        PastTime.SetActive(true);
+        PresentTime.SetActive(false);
+        isInPast = true;
+        timeSinceArrived = FindObjectOfType<FlashBackPersit>().timePast;
+       
+
+    }
+    
     public void SetCurrent()
     {
         isInPast = false;
@@ -78,7 +93,7 @@ public class FlashBackManager : MonoBehaviour
     private IEnumerator ResetAnimation()
     {
         yield return new WaitForSeconds(2);
-        fadeParent.GetComponent<Animator>().ResetTrigger("FlashFade");
+       // fadeParent.GetComponent<Animator>().ResetTrigger("FlashFade");
     }
     public void SwitchTime()
     {

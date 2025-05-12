@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene/LeftHall.unity
     guid: 658fc8ca2d7730542a0eb8788b0b6f08
   - enabled: 1
+    path: Assets/Scenes/GameScene/Kitchen.unity
+    guid: c8ca58b6d776b0c41bc6f0d4c93b7f90
+  - enabled: 1
     path: Assets/Scenes/GameScene/MainEntrance.unity
     guid: bc7e6f70a1bf123469f4d1c4ba246bd2
   - enabled: 1
@@ -32,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene/BigRoom.unity
     guid: 10abb727bd5d2e24cace30a4084271dd
+  - enabled: 1
+    path: Assets/Scenes/GameScene/ArtHall.unity
+    guid: 74ce7252545b23b4ba71c5c733e513cc
+  - enabled: 1
+    path: Assets/Scenes/GameScene/StorageRoom.unity
+    guid: 5a3d8866ad3600a48abbf3706fb0733b
   m_configObjects: {}
