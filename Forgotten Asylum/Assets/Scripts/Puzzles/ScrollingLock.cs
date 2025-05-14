@@ -8,10 +8,12 @@ public class ScrollingLock : MonoBehaviour
     [SerializeField] Sprite unlockedSprite;
     [SerializeField] AudioClip clickAudio;
     [SerializeField] AudioClip correctAudio;
-    [SerializeField] List<int> correctSequence;
+    [SerializeField] public List<int> correctSequence;
     public List<int> sequence;
     public List<TextMeshProUGUI> numText;
     AudioSource audioS;
+
+    public GameObject parentObj;
     void Start()
     {
         audioS = GetComponent<AudioSource>();
@@ -58,7 +60,7 @@ public class ScrollingLock : MonoBehaviour
             audioS.PlayOneShot(correctAudio);
             Debug.Log("Correct");
             yield return new WaitForSeconds(2);
-       
+            parentObj.GetComponent<Door>().UnscrollLock();
             Destroy(gameObject);
         }
     }

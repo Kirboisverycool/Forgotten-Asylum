@@ -15,6 +15,12 @@ public class Door : MonoBehaviour
     [SerializeField] TextMeshProUGUI instructionText;
     [SerializeField] string normalInstructions;
     [SerializeField] string lockedInstructions;
+    
+    [Header("Scroll Lock")]
+    [SerializeField] bool isScrollLocked;
+    [SerializeField] GameObject UILock;
+    [SerializeField] public List<int> sequenceCode;
+    [SerializeField] string ScrollLockedInstructions;
 
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
@@ -35,6 +41,11 @@ public class Door : MonoBehaviour
             instructionText.color = Color.red;
             instructionText.text = lockedInstructions;
         }
+        if (isScrollLocked)
+        {
+            instructionText.color = Color.red;
+            instructionText.text = ScrollLockedInstructions;
+        }
         text.SetActive(false);
     }
 
@@ -43,26 +54,39 @@ public class Door : MonoBehaviour
     {
         if (isInRange && Input.GetKeyDown(keyboardKey))
         {
-            if (!isLockedDoor)
+            if (!isLockedDoor && !isScrollLocked)
             {
-            
+
                 openDoor();
 
             }
-            else 
+            else if (isLockedDoor)
             {
-                if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
+                if (FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
                 {
                     instructionText.color = Color.white;
                     instructionText.text = normalInstructions;
                     isLockedDoor = false;
                 }
             }
+            else if (isScrollLocked)
+            {
+              
+                var uiLock = Instantiate(UILock, GameObject.FindWithTag("MainCanvas").transform);
+                uiLock.GetComponent<ScrollingLock>().correctSequence = sequenceCode;
+                uiLock.GetComponent<ScrollingLock>().parentObj = gameObject;
+            }   
         }
 
 
     }
-    private void openDoor()
+    public void UnscrollLock()
+    {
+        isScrollLocked = false;
+        instructionText.color = Color.white;
+        instructionText.text = normalInstructions;
+    }
+    public void openDoor()
     {
         FindObjectOfType<SpawnPoints>().SetNextPoint(doorToArrive);
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");

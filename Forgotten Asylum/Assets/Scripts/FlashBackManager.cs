@@ -19,6 +19,8 @@ public class FlashBackManager : MonoBehaviour
     [SerializeField] GameObject returnTimerParent;
     [SerializeField] Image circleFill;
     [SerializeField] TextMeshProUGUI TimeleftText;
+    
+   
     //
     public bool isInPast;
     float timeSinceArrived;

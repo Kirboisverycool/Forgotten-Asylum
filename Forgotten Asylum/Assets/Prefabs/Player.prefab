@@ -115,7 +115,7 @@ Transform:
   m_Children:
   - {fileID: 7003727325360454130}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1828668608705176586
 SpriteRenderer:
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536021b2eb7858e468263077b1c71246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoingPuzzle: 0
+  puzzles: []
   movementSpeed: 3
   sprintMultiplier: 1
   stamina: 100
@@ -282,7 +284,7 @@ MonoBehaviour:
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: -0.06826997, y: -0.21827146, z: 0}
@@ -336,7 +338,7 @@ MonoBehaviour:
   - {x: -0.014195085, y: -0.21784794, z: 0}
   m_ShapePathHash: -25845341
   m_Mesh: {fileID: 0}
-  m_InstanceId: -242472
+  m_InstanceId: -1768
   m_LocalBounds:
     m_Center: {x: -0.007065475, y: -0.0059378445, z: 0}
     m_Extent: {x: 0.093853295, y: 0.21268895, z: 0}
