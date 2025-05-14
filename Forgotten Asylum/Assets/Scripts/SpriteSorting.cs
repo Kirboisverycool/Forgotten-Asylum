@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class SpriteSorting : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
