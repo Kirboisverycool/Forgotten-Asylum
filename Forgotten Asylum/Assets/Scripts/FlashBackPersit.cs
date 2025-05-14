@@ -21,8 +21,13 @@ public class FlashBackPersit : MonoBehaviour
     }
     public void GetFlashBackData()
     {
-        isInFlashBack = FindObjectOfType<FlashBackManager>().isInPast;
-        timePast = FindObjectOfType<FlashBackManager>().timeInPast;
+        if (FindObjectOfType<FlashBackManager>() != null)
+        {
+            isInFlashBack = FindObjectOfType<FlashBackManager>().isInPast;
+            timePast = FindObjectOfType<FlashBackManager>().timeInPast;
+        }
+      
+      
         
     }
 

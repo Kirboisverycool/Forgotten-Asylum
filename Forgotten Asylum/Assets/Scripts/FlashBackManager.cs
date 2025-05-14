@@ -27,6 +27,7 @@ public class FlashBackManager : MonoBehaviour
     void Start()
     {
         returnTimerParent.SetActive(false);
+        Debug.Log(FindObjectOfType<FlashBackPersit>());
         if (FindObjectOfType<FlashBackPersit>().isInFlashBack == true)
         {
             LoadPast();
@@ -70,6 +71,7 @@ public class FlashBackManager : MonoBehaviour
     }
     public void LoadPast()
     {
+        Debug.Log("SetPast");
         PastTime.SetActive(true);
         PresentTime.SetActive(false);
         isInPast = true;
