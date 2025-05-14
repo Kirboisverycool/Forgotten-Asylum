@@ -52,7 +52,8 @@ public class PlayerMouvement : MonoBehaviour
 
     void Start()
     {
- 
+        Application.targetFrameRate = -1;
+        QualitySettings.vSyncCount = 0;
 
 
         SpawnPoints sp = FindObjectOfType<SpawnPoints>();
