@@ -49,7 +49,7 @@ MonoBehaviour:
   fadeParent: {fileID: 0}
   PresentTime: {fileID: 0}
   PastTime: {fileID: 0}
-  timeInPast: 30
+  timeInPast: 15
   returnTimerParent: {fileID: 0}
   circleFill: {fileID: 0}
   TimeleftText: {fileID: 0}
