@@ -52,6 +52,9 @@ public class PlayerMouvement : MonoBehaviour
 
     void Start()
     {
+ 
+
+
         SpawnPoints sp = FindObjectOfType<SpawnPoints>();
         Debug.Log(sp);
         if (sp.nextPoint != 0)
@@ -70,7 +73,9 @@ public class PlayerMouvement : MonoBehaviour
  
     void Update()
     {
-        if(!isDoingPuzzle)
+
+
+        if (!isDoingPuzzle)
         {
             MouvementInputs();
             Sprint();
