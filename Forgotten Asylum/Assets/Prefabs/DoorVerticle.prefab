@@ -503,9 +503,14 @@ MonoBehaviour:
   instructionText: {fileID: 424105609865761119}
   normalInstructions: 
   lockedInstructions: F-LOCKED!
+  isScrollLocked: 0
+  UILock: {fileID: 0}
+  sequenceCode: 
+  ScrollLockedInstructions: 
   keyboardKey: 102
   text: {fileID: 10649832685094277}
   delayTime: 1
+  doorSound: {fileID: 8300000, guid: 0b190f258c6c2464cb08c64f65c57b83, type: 3}
   roomNameToGo: BigRoom
   DoorID: 7
   doorToArrive: 8

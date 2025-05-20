@@ -56,12 +56,6 @@ public class PlayerMouvement : MonoBehaviour
         QualitySettings.vSyncCount = 0;
 
 
-        SpawnPoints sp = FindObjectOfType<SpawnPoints>();
-        Debug.Log(sp);
-        if (sp.nextPoint != 0)
-        {
-            sp.FindSpawnPoint();
-        }
      
 
         anim = GetComponent<Animator>();

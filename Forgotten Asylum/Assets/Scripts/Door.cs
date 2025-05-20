@@ -26,6 +26,7 @@ public class Door : MonoBehaviour
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject text;
     [SerializeField] float delayTime;
+    [SerializeField] AudioClip doorSound;
 
 
     [Header("Identifiers")]
@@ -88,15 +89,39 @@ public class Door : MonoBehaviour
     }
     public void openDoor()
     {
-        FindObjectOfType<SpawnPoints>().SetNextPoint(doorToArrive);
+      
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
         StartCoroutine(DelayLoad());
     }
     IEnumerator DelayLoad()
     {
+        AudioSource.PlayClipAtPoint(doorSound, transform.position);
         yield return new WaitForSeconds(delayTime);
-        FindObjectOfType<FlashBackPersit>().GetFlashBackData();
-        SceneManager.LoadScene(roomNameToGo);
+        Rooms roomList =FindObjectOfType<Rooms>();
+        for (int i = 0; i < roomList.roomParents.Count; i++)
+        {
+            if (roomList.roomParents[i].name == roomNameToGo)
+            {
+                roomList.DisableAll();
+                roomList.roomParents[i].SetActive(true);
+                roomList.activeIndex = i;
+                for (int j = 0; j < roomList.roomParents[i].transform.childCount; j++)
+                {
+                    if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>() != null)
+                    {
+                        if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().DoorID == doorToArrive)
+                        {
+                            FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
+                           // Camera.main.transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
+                        }
+                    }
+              
+                }
+            
+                yield return null;
+
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
