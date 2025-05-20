@@ -5,7 +5,7 @@ using UnityEngine;
 public class Heartbeat : MonoBehaviour
 {
     EnemyAI enemy;
-    [SerializeField] float distanceFromEnemy;
+    [SerializeField] Vector2 distanceFromEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,8 @@ public class Heartbeat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(distanceFromEnemy);
+
+
+        //Debug.Log(distanceFromEnemy);
     }
 }

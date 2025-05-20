@@ -12,7 +12,7 @@ public class Piano : MonoBehaviour
     [SerializeField] List<int> codeText = new List<int>();
     [SerializeField] int finalDigit;
 
-    [SerializeField] bool finishedPuzzle = false;
+    public bool finishedPuzzle = false;
     /*    [SerializeField] AudioSource audioSource;
         [SerializeField] AudioClip audioClip;*/
 
