@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class InventoryScript : MonoBehaviour
 {
     [SerializeField] List<ObjectData> inventoryItemList;
     [SerializeField] List<GameObject> inventoryUI;
     [SerializeField] GameObject inventoryGrid;
-
+    [SerializeField] GameObject itemNameText;
     public int selectedSlot = 0;
     [SerializeField] GameObject selectorUi;
 
@@ -45,6 +45,7 @@ public class InventoryScript : MonoBehaviour
             {
                  selectedSlot++;
             }
+            NameTextUpdate();
         }
   
 
@@ -59,12 +60,24 @@ public class InventoryScript : MonoBehaviour
             {
                 selectedSlot--;
             }
-
+            NameTextUpdate();
         }
- 
-        selectorUi.transform.position = inventoryUI[selectedSlot].transform.position;
-    }
 
+        
+        selectorUi.transform.position = inventoryUI[selectedSlot].transform.position;
+
+    }
+    public void NameTextUpdate()
+    {
+        if (selectedSlot+1 <= inventoryItemList.Count)
+        {
+            itemNameText.GetComponent<TextMeshProUGUI>().text = inventoryItemList[selectedSlot].objectName;
+        }
+        else
+        {
+            itemNameText.GetComponent<TextMeshProUGUI>().text = "";
+        }
+    }
 
     public string HasItemInHand()
     {
@@ -87,7 +100,10 @@ public class InventoryScript : MonoBehaviour
             int index = inventoryItemList.IndexOf(data);
             inventoryUI[index].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
             inventoryUI[index].transform.GetChild(0).GetComponent<Image>().sprite = data.hotbarImage;
+
+            NameTextUpdate();
             return true;
+
 
         }
         else

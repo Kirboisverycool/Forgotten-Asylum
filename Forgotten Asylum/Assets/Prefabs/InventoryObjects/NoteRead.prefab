@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3d6745a75068e4c458cbf0ce1382910f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cace77f3f007bd94684c65a97c78effc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5799991317228020860}
   - component: {fileID: 6096506470984500072}
   m_Layer: 0
-  m_Name: Journal
+  m_Name: NoteRead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   objectToTrigger: {fileID: 8470676209047279870}
   isNearest: 0
   sRenderer: {fileID: 7522864221731217902}
-  highlitedVerison: {fileID: 21300000, guid: 9064ba56fee41b843a4e6322f2a57eaa, type: 3}
+  highlitedVerison: {fileID: 21300000, guid: cace77f3f007bd94684c65a97c78effc, type: 3}
 --- !u!58 &6096506470984500072
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -479,9 +479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Journal
-
-'
+  m_text: Note
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e03c1c46664c655499e2ed474b81c288, type: 2}
   m_sharedMaterial: {fileID: -3010822676482602466, guid: e03c1c46664c655499e2ed474b81c288, type: 2}
@@ -559,7 +557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3349759889023587929}
-  - component: {fileID: 1313572991591774721}
+  - component: {fileID: 7257723601026751875}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -582,7 +580,7 @@ Transform:
   m_Father: {fileID: 9099631257641351985}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1313572991591774721
+--- !u!114 &7257723601026751875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,6 +589,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8470676209047279870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f754a3dea0af8ab4f8f6faa46ff3a8c3, type: 3}
+  m_Script: {fileID: 11500000, guid: d20207107325c8d4b9cfba47e75ff5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 3965357583570177524, guid: 5de1b5b27856e45498b372a47c2f463a, type: 3}

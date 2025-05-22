@@ -12,8 +12,10 @@ public class FlashBackManager : MonoBehaviour
     [SerializeField] AudioClip returnSound;
     [SerializeField] GameObject fadeParent;
     [Header("Objects")]
-    [SerializeField] GameObject PresentTime;
-    [SerializeField] GameObject PastTime;
+
+    [SerializeField] public GameObject presentTimeScene;
+    [SerializeField] public GameObject pastTimeScene;
+
     [Header("ReturnTimer")]
     [SerializeField] public int timeInPast;
     [SerializeField] GameObject returnTimerParent;
@@ -30,79 +32,91 @@ public class FlashBackManager : MonoBehaviour
     public bool isInPast;
     float timeSinceArrived;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        returnTimerParent.SetActive(false);
-        
-      
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void EnsureCorrectScene()
     {
         if (isInPast)
         {
-            timeSinceArrived += Time.deltaTime;
-            int timeLeft = timeInPast - Mathf.RoundToInt(timeSinceArrived);
-            TimeleftText.text = timeLeft.ToString();
-            float fillA = timeInPast - timeSinceArrived;
-            circleFill.fillAmount = fillA / timeInPast;
-            if (timeSinceArrived >= timeInPast)
-            {
-                SetCurrent();
-            }
-        }
-    }
-    private void SetPastTimer()
-    {
-        returnTimerParent.SetActive(true);
-        timeSinceArrived = 0;
-        TimeleftText.text = timeInPast.ToString();
-        circleFill.fillAmount = 1;
-        isInPast = true;
-    }
-    public void SetPassed()
-    {
-      //  fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
-        AudioSource.PlayClipAtPoint(flashBackSound, Camera.main.transform.position);
-        PastTime.SetActive(true);
-        PresentTime.SetActive(false);
-        SetPastTimer();
-        StartCoroutine(ResetAnimation());
-        
-    }
-
-    public void SetCurrent()
-    {
-        isInPast = false;
-        returnTimerParent.SetActive(false);
-    //  fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
-        AudioSource.PlayClipAtPoint(returnSound, Camera.main.transform.position);
-        PresentTime.SetActive(true);
-        PastTime.SetActive(false);
-        StartCoroutine(ResetAnimation());
-        
-    }
-
-    private IEnumerator ResetAnimation()
-    {
-        yield return new WaitForSeconds(2);
-       // fadeParent.GetComponent<Animator>().ResetTrigger("FlashFade");
-    }
-    public void SwitchTime()
-    {
-        isInPastTime = !isInPastTime;
-
-        if (isInPastTime)
-        {
-            PresentTime.SetActive(false);
-            PastTime.SetActive(true);
+            presentTimeScene.SetActive(false);
+            pastTimeScene.SetActive(true);
         }
         else
         {
-            PresentTime.SetActive(true);
-            PastTime.SetActive(false);
+            presentTimeScene.SetActive(true);
+            pastTimeScene.SetActive(false);
         }
     }
-}
+        void Start()
+        {
+            returnTimerParent.SetActive(false);
+
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (isInPast)
+            {
+                timeSinceArrived += Time.deltaTime;
+                int timeLeft = timeInPast - Mathf.RoundToInt(timeSinceArrived);
+                TimeleftText.text = timeLeft.ToString();
+                float fillA = timeInPast - timeSinceArrived;
+                circleFill.fillAmount = fillA / timeInPast;
+                if (timeSinceArrived >= timeInPast)
+                {
+                    SetCurrent();
+                }
+            }
+        }
+        private void SetPastTimer()
+        {
+            returnTimerParent.SetActive(true);
+            timeSinceArrived = 0;
+            TimeleftText.text = timeInPast.ToString();
+            circleFill.fillAmount = 1;
+            isInPast = true;
+        }
+        public void SetPassed()
+        {
+            //  fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
+            AudioSource.PlayClipAtPoint(flashBackSound, Camera.main.transform.position);
+            pastTimeScene.SetActive(true);
+            presentTimeScene.SetActive(false);
+            SetPastTimer();
+            StartCoroutine(ResetAnimation());
+
+        }
+
+        public void SetCurrent()
+        {
+            isInPast = false;
+            returnTimerParent.SetActive(false);
+            //  fadeParent.GetComponent<Animator>().SetTrigger("FlashFade");
+            AudioSource.PlayClipAtPoint(returnSound, Camera.main.transform.position);
+            presentTimeScene.SetActive(true);
+            pastTimeScene.SetActive(false);
+            StartCoroutine(ResetAnimation());
+
+        }
+
+        private IEnumerator ResetAnimation()
+        {
+            yield return new WaitForSeconds(2);
+            // fadeParent.GetComponent<Animator>().ResetTrigger("FlashFade");
+        }
+        public void SwitchTime()
+        {
+            isInPastTime = !isInPastTime;
+
+            if (isInPastTime)
+            {
+                presentTimeScene.SetActive(false);
+                pastTimeScene.SetActive(true);
+            }
+            else
+            {
+                presentTimeScene.SetActive(true);
+                pastTimeScene.SetActive(false);
+            }
+        }
+    }

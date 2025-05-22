@@ -96,15 +96,14 @@ public class Door : MonoBehaviour
     IEnumerator DelayLoad()
     {
         AudioSource.PlayClipAtPoint(doorSound, transform.position);
+        GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSeconds(delayTime);
         Rooms roomList =FindObjectOfType<Rooms>();
         for (int i = 0; i < roomList.roomParents.Count; i++)
         {
             if (roomList.roomParents[i].name == roomNameToGo)
             {
-                roomList.DisableAll();
-                roomList.roomParents[i].SetActive(true);
-                roomList.activeIndex = i;
+                roomList.SetNewActive(i);
                 for (int j = 0; j < roomList.roomParents[i].transform.childCount; j++)
                 {
                     if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>() != null)
@@ -112,7 +111,7 @@ public class Door : MonoBehaviour
                         if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().DoorID == doorToArrive)
                         {
                             FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
-                           // Camera.main.transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
+                            GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(true);
                         }
                     }
               
