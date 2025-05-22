@@ -37,6 +37,22 @@ public class ScrollingLock : MonoBehaviour
         updateNumText(index, sequence[index]);
         StartCoroutine(Compare());
     }
+
+    public void UpdateNegativeNumber(int index)
+    {
+        audioS.PlayOneShot(clickAudio);
+        if (sequence[index] - 1 == -1)
+        {
+            sequence[index] = 9;
+        }
+        else
+        {
+            sequence[index]--;
+        }
+        updateNumText(index, sequence[index]);
+        StartCoroutine(Compare());
+    }
+
    //Check
     private void updateNumText(int index, int number)
     {

@@ -64,7 +64,6 @@ public class PlayerMouvement : MonoBehaviour
         staminaBar.SetActive(false);
         staminaFillBar = staminaBar.transform.GetChild(1).GetComponent<Image>();
     }
-
  
     void Update()
     {
