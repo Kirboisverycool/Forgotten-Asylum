@@ -12,8 +12,18 @@ public class ScrollingLock : MonoBehaviour
     public List<int> sequence;
     public List<TextMeshProUGUI> numText;
     AudioSource audioS;
+    GameObject player;
 
     public GameObject parentObj;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        player.GetComponent<PlayerMouvement>().enabled = false;
+    }
+
     void Start()
     {
         audioS = GetComponent<AudioSource>();
@@ -83,6 +93,7 @@ public class ScrollingLock : MonoBehaviour
 
     public void CloseTab()
     {
+        player.GetComponent<PlayerMouvement>().enabled = true;
         Destroy(gameObject);
     }
 }

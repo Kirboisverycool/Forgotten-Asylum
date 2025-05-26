@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,12 @@ using UnityEngine;
 public class InteractManager : MonoBehaviour
 {
     public List<GameObject> interactables;
+
     void Update()
     {
         DecideNearestInteractable();
     }
+
     public void AddToList(GameObject obj)
     { 
         interactables.Add(obj);
