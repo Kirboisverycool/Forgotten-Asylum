@@ -7,12 +7,14 @@ public class PostProccesingInteracting : MonoBehaviour
 {
     Volume volume;
     DepthOfField dof;
+    FilmGrain fm;
     [SerializeField] List<GameObject> uiToHide;
     private void Start()
     {
         volume = GetComponent<Volume>();
        
         volume.profile.TryGet(out dof);
+        volume.profile.TryGet(out fm);
     }
 
     public void ToggleBlur(bool state)
@@ -23,5 +25,9 @@ public class PostProccesingInteracting : MonoBehaviour
             uiToHide[i].SetActive(!state);
         }
 
+    }
+    public void ToggleFilmGrain(bool state)
+    {
+        fm.active = state;
     }
 }

@@ -747,8 +747,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536, y: 450}
-  m_SizeDelta: {x: 764.77, y: 88.2}
+  m_AnchoredPosition: {x: 480.2192, y: 411.73}
+  m_SizeDelta: {x: 876.3315, y: 164.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886735038
 MonoBehaviour:
@@ -772,8 +772,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Forgotten Asylum
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f90b3a9058fe7a84498b780d94c24736, type: 2}
+  m_sharedMaterial: {fileID: -53026008544718376, guid: f90b3a9058fe7a84498b780d94c24736, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1443,6 +1443,7 @@ GameObject:
   - component: {fileID: 1493627250}
   - component: {fileID: 1493627252}
   - component: {fileID: 1493627251}
+  - component: {fileID: 1493627253}
   m_Layer: 5
   m_Name: BarFill
   m_TagString: Untagged
@@ -1508,6 +1509,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493627249}
   m_CullTransparentMesh: 1
+--- !u!95 &1493627253
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493627249}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 250bd49e35311f9439f8a3d4ae6c353c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1505704994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,8 +2405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c350f815f96c10549a53c552e23f0469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
-  mainSceneName: 
+  delay: 5.5
+  mainSceneName: GameScene
 --- !u!4 &2055720311
 Transform:
   m_ObjectHideFlags: 0

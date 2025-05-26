@@ -15,7 +15,8 @@ public class Door : MonoBehaviour
     [SerializeField] TextMeshProUGUI instructionText;
     [SerializeField] string normalInstructions;
     [SerializeField] string lockedInstructions;
-    
+    [SerializeField] AudioClip unlockAudio;
+
     [Header("Scroll Lock")]
     [SerializeField] bool isScrollLocked;
     [SerializeField] GameObject UILock;
@@ -34,6 +35,8 @@ public class Door : MonoBehaviour
     [SerializeField] public int DoorID;
     [SerializeField] int doorToArrive;
     [SerializeField] public GameObject spawnPoint;
+  
+    public bool canUse = true;
     void Start()
     {
         normalInstructions = instructionText.text;
@@ -57,8 +60,12 @@ public class Door : MonoBehaviour
         {
             if (!isLockedDoor && !isScrollLocked)
             {
+                if (canUse)
+                {
+                    openDoor();
+                }
 
-                openDoor();
+               
 
             }
             else if (isLockedDoor)
@@ -67,7 +74,9 @@ public class Door : MonoBehaviour
                 {
                     instructionText.color = Color.white;
                     instructionText.text = normalInstructions;
+                    AudioSource.PlayClipAtPoint(unlockAudio, transform.position);
                     isLockedDoor = false;
+                    
                 }
             }
             else if (isScrollLocked)
@@ -89,7 +98,8 @@ public class Door : MonoBehaviour
     }
     public void openDoor()
     {
-      
+        
+        canUse = false;
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
         StartCoroutine(DelayLoad());
     }
@@ -112,6 +122,7 @@ public class Door : MonoBehaviour
                         {
                             FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
                             GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(true);
+                            canUse = true;
                         }
                     }
               

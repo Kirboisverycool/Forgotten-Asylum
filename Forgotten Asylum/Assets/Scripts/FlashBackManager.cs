@@ -84,6 +84,7 @@ public class FlashBackManager : MonoBehaviour
             presentTimeScene.SetActive(false);
             SetPastTimer();
             StartCoroutine(ResetAnimation());
+            FindObjectOfType<PostProccesingInteracting>().ToggleFilmGrain(true);
 
         }
 
@@ -96,8 +97,9 @@ public class FlashBackManager : MonoBehaviour
             presentTimeScene.SetActive(true);
             pastTimeScene.SetActive(false);
             StartCoroutine(ResetAnimation());
+        FindObjectOfType<PostProccesingInteracting>().ToggleFilmGrain(false);
 
-        }
+    }
 
         private IEnumerator ResetAnimation()
         {

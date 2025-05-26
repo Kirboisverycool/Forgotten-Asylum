@@ -336,7 +336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: F-Enter
+  m_text: F
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7471e2856d1756f4da0e11fc041ce589, type: 2}
   m_sharedMaterial: {fileID: 5355278397703193220, guid: 7471e2856d1756f4da0e11fc041ce589, type: 2}
@@ -438,7 +438,7 @@ Transform:
   - {fileID: 7844767076542716323}
   - {fileID: 3895691350324225405}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &959990454711855361
 BoxCollider2D:
@@ -502,7 +502,8 @@ MonoBehaviour:
   unlockedItemName: 
   instructionText: {fileID: 424105609865761119}
   normalInstructions: 
-  lockedInstructions: F-LOCKED!
+  lockedInstructions: F-LOCKED
+  unlockAudio: {fileID: 8300000, guid: 9562860d4aab9cd45bb4ae6ca6cad49f, type: 3}
   isScrollLocked: 0
   UILock: {fileID: 0}
   sequenceCode: 
@@ -515,3 +516,4 @@ MonoBehaviour:
   DoorID: 7
   doorToArrive: 8
   spawnPoint: {fileID: 4890876505719357471}
+  canUse: 1
