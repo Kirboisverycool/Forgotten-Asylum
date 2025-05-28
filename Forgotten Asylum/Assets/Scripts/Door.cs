@@ -35,12 +35,9 @@ public class Door : MonoBehaviour
     [SerializeField] public int DoorID;
     [SerializeField] int doorToArrive;
     [SerializeField] public GameObject spawnPoint;
-<<<<<<< Updated upstream
   
     public bool canUse = true;
-=======
 
->>>>>>> Stashed changes
     void Start()
     {
         normalInstructions = instructionText.text;
