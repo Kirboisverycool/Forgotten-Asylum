@@ -50,6 +50,7 @@ public class Interactables : MonoBehaviour
         {
             FindObjectOfType<InteractManager>().RemoveFromList(gameObject);
             nearText.SetActive(false);
+            NotNearest();
             if (highlitedVerison != null)
             {
                 sRenderer.sprite = normalVersion;
@@ -58,14 +59,16 @@ public class Interactables : MonoBehaviour
     }
     public void IsNearest()
     {
-        if (highlitedVerison != null) { sRenderer.sprite = highlitedVerison; }
+        if (highlitedVerison != null) 
+        { 
+            sRenderer.sprite = highlitedVerison; 
+        }
     
         nearText.SetActive(true);
         isNearest = true;
     }
     public void NotNearest()
     {
-       
         if(highlitedVerison != null)
         {
             sRenderer.sprite = normalVersion;

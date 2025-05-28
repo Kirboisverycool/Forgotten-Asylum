@@ -87,6 +87,7 @@ public class ScrollingLock : MonoBehaviour
             Debug.Log("Correct");
             yield return new WaitForSeconds(2);
             parentObj.GetComponent<Door>().UnscrollLock();
+            player.GetComponent<PlayerMouvement>().enabled = true;
             Destroy(gameObject);
         }
     }

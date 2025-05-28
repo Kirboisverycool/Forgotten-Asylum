@@ -36,6 +36,7 @@ public class InteractManager : MonoBehaviour
         if (nearestObject != null)
         {
             nearestObject.GetComponent<Interactables>().IsNearest();
+
             for (int i = 0; i < interactables.Count; i++)
             {
                 if (interactables[i] != nearestObject)
