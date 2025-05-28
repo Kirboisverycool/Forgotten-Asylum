@@ -24,7 +24,7 @@ public class WoodPanels : MonoBehaviour
             if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
             {
                 AudioSource.PlayClipAtPoint(woodBreakSound, transform.position);
-                doorObject.SetActive(true);
+                doorObject.SetActive(true);     
                 Destroy(gameObject);
 
 

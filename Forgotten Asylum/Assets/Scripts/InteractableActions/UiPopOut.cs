@@ -15,13 +15,25 @@ public class UiPopOut : MonoBehaviour
 
     private void OnEnable()
     {
-        FindObjectOfType<PostProccesingInteracting>().ToggleBlur(true);
-        var uiIrl = Instantiate(ui);
-        uiIrl.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform, false);
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        player.GetComponent<PlayerMouvement>().enabled = false;
+        if (GameObject.FindGameObjectsWithTag("UiPopUp").Length > 0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            FindObjectOfType<PostProccesingInteracting>().ToggleBlur(true);
+            var uiIrl = Instantiate(ui);
+            uiIrl.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform, false);
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            player.GetComponent<PlayerMouvement>().enabled = false;
+            gameObject.SetActive(false);
+            return;
+        }
+      
 
-        gameObject.SetActive(false);
+      
 
     }
+    
 }

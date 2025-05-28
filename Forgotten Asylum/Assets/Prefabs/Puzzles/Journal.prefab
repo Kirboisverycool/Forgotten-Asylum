@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8901603135092833408}
   m_Layer: 5
   m_Name: Journal
-  m_TagString: Untagged
+  m_TagString: UiPopUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

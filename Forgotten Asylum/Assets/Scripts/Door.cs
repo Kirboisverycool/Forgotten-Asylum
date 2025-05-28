@@ -122,6 +122,7 @@ public class Door : MonoBehaviour
                         if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().DoorID == doorToArrive)
                         {
                             FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
+                            
                             GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(true);
                             canUse = true;
                         }
