@@ -115,7 +115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E-Pickup
+  m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7471e2856d1756f4da0e11fc041ce589, type: 2}
   m_sharedMaterial: {fileID: 5355278397703193220, guid: 7471e2856d1756f4da0e11fc041ce589, type: 2}
@@ -451,13 +451,13 @@ Transform:
   m_GameObject: {fileID: 7890982368269493182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.39, y: -0, z: 0}
-  m_LocalScale: {x: 0.35714284, y: 0.35714284, z: 0.35714284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8735281427468263571}
   - {fileID: 404583712623590864}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1987707483537712253
 SpriteRenderer:
