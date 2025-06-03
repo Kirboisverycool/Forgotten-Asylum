@@ -11,18 +11,31 @@ public class RotateMirrors : MonoBehaviour
     [SerializeField] MirrorPuzzle puzzleParent;
     [SerializeField] float rotationRate;
     [SerializeField] float rotationDelay;
-    [SerializeField] float minRotation;
-    [SerializeField] float maxRotation;
+    [SerializeField] float correcteRotation;
+    public float minRotation;
+    public float maxRotation;
+    [SerializeField] GameObject target;
+
     public bool isInRotationRange;
     public float zRotation;
+    float startZ;
 
     void Start()
     {
+        
         controlText.SetActive(false);
         zRotation = gameObject.transform.eulerAngles.z;
     }
+    private void getAngles()
+    {
+        Vector3 direction = target.transform.position - transform.position;
+        correcteRotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        minRotation = correcteRotation -5;
+        maxRotation = correcteRotation +5;
+        Quaternion lookRot = Quaternion.LookRotation(direction);
 
-    // Update is called once per frame
+    }
+
     void Update()
     {
         if (inRange && Input.GetKey(KeyCode.E))
