@@ -6,31 +6,63 @@ public class LightFlicker : MonoBehaviour
 {
     public Light2D myLight;
     public float maxInterval = 1f;
+    public float minWait;
+    public float maxWait;
+    float defautltIntensity;
 
-    float targetIntensity;
-    float lastIntensity;
+   
     float interval;
     float timer;
 
-    public float maxDisplacement = 0.25f;
   
 
+    bool isOn;
+    bool canFlicker;
 
-    void Update()
+    private void Start()
+    {
+        defautltIntensity = myLight.intensity;
+        StartCoroutine(WaitToggle());
+    }
+
+    private void flicker()
     {
         timer += Time.deltaTime;
 
         if (timer > interval)
         {
-            lastIntensity = myLight.intensity;
-            targetIntensity = Random.Range(0.5f, 3f);
+            if (myLight.intensity == 0)
+            {
+                myLight.intensity = defautltIntensity;
+            }
+            else
+            {
+                myLight.intensity = defautltIntensity;
+            }
             timer = 0;
             interval = Random.Range(0, maxInterval);
 
 
         }
 
-             myLight.intensity = Mathf.Lerp(lastIntensity, targetIntensity, timer / interval);
+
+    }
+    void Update()
+    {
+        if (canFlicker)
+        { 
+            flicker();
+        }
              
+    }
+    IEnumerator WaitToggle()
+    {
+        if (myLight.intensity <= 0)
+        {
+            myLight.intensity = defautltIntensity;
+        }
+        yield return new WaitForSeconds(Random.Range(minWait,maxWait));
+        canFlicker = !canFlicker;
+        StartCoroutine(WaitToggle());
     }
 }

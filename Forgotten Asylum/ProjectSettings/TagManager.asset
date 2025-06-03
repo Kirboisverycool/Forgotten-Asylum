@@ -55,3 +55,6 @@ TagManager:
   - name: Furniture
     uniqueID: 2624613883
     locked: 0
+  - name: LightPuzzle
+    uniqueID: 3604169551
+    locked: 0

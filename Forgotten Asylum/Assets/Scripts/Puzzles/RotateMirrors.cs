@@ -15,6 +15,8 @@ public class RotateMirrors : MonoBehaviour
     public float minRotation;
     public float maxRotation;
     [SerializeField] GameObject target;
+    [SerializeField] float targetBuffer;
+    [SerializeField] GameObject raycastAim;
 
     public bool isInRotationRange;
     public float zRotation;
@@ -22,34 +24,22 @@ public class RotateMirrors : MonoBehaviour
 
     void Start()
     {
-        
         controlText.SetActive(false);
         zRotation = gameObject.transform.eulerAngles.z;
-    }
-    private void getAngles()
-    {
-        Vector3 direction = target.transform.position - transform.position;
-        correcteRotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        minRotation = correcteRotation -5;
-        maxRotation = correcteRotation +5;
-        Quaternion lookRot = Quaternion.LookRotation(direction);
 
     }
+    
 
     void Update()
     {
         if (inRange && Input.GetKey(KeyCode.E))
         {
-            if (gameObject.transform.eulerAngles.z > minRotation && gameObject.transform.eulerAngles.z < maxRotation)
+           
+            if (RayCheck())
             {
-
-                Debug.Log("In Range");
-                isInRotationRange = true;
+                puzzleParent.CheckForCorrect();
             }
-            else
-            {
-                isInRotationRange = false;
-            }
+          
           //  Debug.Log(gameObject.transform.eulerAngles.z);
 
             if (!isRotating)
@@ -58,11 +48,38 @@ public class RotateMirrors : MonoBehaviour
                 StartCoroutine(addRotation());
 
             }
-            puzzleParent.CheckForCorrect();
+          
        
         }
 
 
+    }
+    private bool RayCheck()
+    {
+
+        RaycastHit hit;
+        Debug.DrawLine(transform.position, raycastAim.transform.position , Color.green);
+      
+        if (Physics.Raycast(transform.position, raycastAim.transform.position, out hit , 100))
+        {
+            Debug.Log("Hit");
+            if (hit.Equals(target.transform.GetChild(1)))
+            {
+                isInRotationRange = true;
+                return true;
+              
+            }
+            isInRotationRange = false;
+            return false;
+
+        }
+        else
+        {
+            isInRotationRange = false;
+            return false;
+
+        }
+      
     }
     IEnumerator addRotation()
     {
