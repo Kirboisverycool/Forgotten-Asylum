@@ -35,14 +35,9 @@ public class EnemyAI : MonoBehaviour
     [Header("Target Location")]
     [SerializeField] float updatePathTime;
 
-    [Header("Sprite")]
-    [SerializeField] bool isFacingLeft = false;
-    SpriteRenderer spriteRenderer;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 

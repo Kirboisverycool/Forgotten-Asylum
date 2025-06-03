@@ -13,9 +13,9 @@ public class PlayerMouvement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 movementInputs;
 
-    [Header("Puzzle")]
+/*    [Header("Puzzle")]
     [SerializeField] bool isDoingPuzzle = false;
-    [SerializeField] GameObject[] puzzles;
+    [SerializeField] GameObject[] puzzles;*/
 
     [Header("Speeds")]
     [SerializeField] float movementSpeed;
@@ -24,7 +24,6 @@ public class PlayerMouvement : MonoBehaviour
     [Header("Stamina")]
     [SerializeField] float stamina = 100f;
     [SerializeField] float removeStaminaRate= 0.1f;
-    [SerializeField] float addStaminaCoolDown = 3;
     [SerializeField] float timeSinceLastSprinted = 0;
     [SerializeField] bool isMoving = false;
     bool isRemovingStamina = false;
@@ -69,15 +68,15 @@ public class PlayerMouvement : MonoBehaviour
     {
 
 
-        if (!isDoingPuzzle)
-        {
+/*        if (!isDoingPuzzle)
+        {*/
             MouvementInputs();
             Sprint();
             MoveAudio();
             Animate();
-        }
+        //}
 
-        StopIfDoingPuzzle();
+        //StopIfDoingPuzzle();
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -95,7 +94,7 @@ public class PlayerMouvement : MonoBehaviour
         }
     }
 
-    private void StopIfDoingPuzzle()
+/*    private void StopIfDoingPuzzle()
     {
         if (puzzles != null)
         {
@@ -112,7 +111,7 @@ public class PlayerMouvement : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private void Animate()
     {
@@ -141,10 +140,10 @@ public class PlayerMouvement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isDoingPuzzle)
-        {
+/*        if (!isDoingPuzzle)
+        {*/
             Move();
-        }
+        //}
     }
 
     private void Sprint()
