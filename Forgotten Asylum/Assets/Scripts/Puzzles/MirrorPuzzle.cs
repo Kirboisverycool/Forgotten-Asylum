@@ -15,8 +15,12 @@ public class MirrorPuzzle : MonoBehaviour
                 mirrors[i + 1].reflectionLight.SetActive(true);
             }
             else
-            { 
-                return;
+            {
+                for (int j = i; j < mirrors.Count; j++)
+                { 
+                
+                }
+               
             }
 
         }

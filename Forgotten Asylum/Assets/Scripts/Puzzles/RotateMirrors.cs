@@ -17,7 +17,7 @@ public class RotateMirrors : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] float targetBuffer;
     [SerializeField] GameObject raycastAim;
-
+    [SerializeField] GameObject rayCastOrigin;
     public bool isInRotationRange;
     public float zRotation;
     float startZ;
@@ -56,30 +56,30 @@ public class RotateMirrors : MonoBehaviour
     }
     private bool RayCheck()
     {
+        Vector2 origin = rayCastOrigin.transform.position;
+        Vector2 direction = ((Vector2)raycastAim.transform.position - origin).normalized;
+        float distance = Vector2.Distance(origin, raycastAim.transform.position);
+        LayerMask detectionLayer = LayerMask.GetMask("Reflection");
 
-        RaycastHit hit;
-        Debug.DrawLine(transform.position, raycastAim.transform.position , Color.green);
-      
-        if (Physics.Raycast(transform.position, raycastAim.transform.position, out hit , 100))
+        Debug.DrawLine(origin, origin + direction * distance, Color.green);
+
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, detectionLayer);
+
+        if (hit.collider != null)
         {
-            Debug.Log("Hit");
-            if (hit.Equals(target.transform.GetChild(1)))
+            Debug.Log("Hit: " + hit.collider.gameObject.name);
+
+            if (hit.collider.gameObject == target.transform.GetChild(0).gameObject)
             {
+                Debug.LogWarning("HitCorrect!");
                 isInRotationRange = true;
                 return true;
-              
             }
-            isInRotationRange = false;
-            return false;
-
         }
-        else
-        {
-            isInRotationRange = false;
-            return false;
 
-        }
-      
+        isInRotationRange = false;
+        return false;
     }
     IEnumerator addRotation()
     {
