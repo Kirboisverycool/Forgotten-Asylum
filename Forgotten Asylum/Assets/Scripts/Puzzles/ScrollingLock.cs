@@ -16,6 +16,11 @@ public class ScrollingLock : MonoBehaviour
 
     public GameObject parentObj;
 
+
+    [SerializeField] float test;
+    [SerializeField] Vector3 startingMousePosition;
+    [SerializeField] Vector3 currentMousePosition;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -32,9 +37,46 @@ public class ScrollingLock : MonoBehaviour
             numText.Add(transform.GetChild(0).GetChild(i).GetComponentInChildren<TextMeshProUGUI>());
         }
     }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            startingMousePosition.x = Input.mousePosition.x;
+        }
+
+    }
+
+    public void GetMousePosition()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            currentMousePosition.x = Input.mousePosition.x;
+
+            test = currentMousePosition.x - startingMousePosition.x;
+        }
+    }
+
+    public void CheckIfLeftOrRight(int index)
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (test >= 0)
+            {
+                UpdateNumber(index);
+                //Debug.Log("Right");
+            }
+            if (test < 0)
+            {
+                UpdateNegativeNumber(index);
+                //Debug.Log("Left");
+            }
+        }
+    }
+
     public void UpdateNumber(int index)
     {
-        audioS.PlayOneShot(clickAudio);   
+        audioS.PlayOneShot(clickAudio);
         if (sequence[index] + 1 == 10)
         {
             sequence[index] = 0;

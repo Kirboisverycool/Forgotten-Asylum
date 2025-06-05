@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +35,10 @@ public class PlayerMouvement : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] AudioClip groundSoundClip;
+    [SerializeField] float maxVolume;
+    [SerializeField] float minVolume;
+    [SerializeField] float maxPitch;
+    [SerializeField] float minPitch;
     AudioSource aSource;
 
     [Header("Animations")]
@@ -124,17 +127,16 @@ public class PlayerMouvement : MonoBehaviour
 
     private void MoveAudio()
     {
-        if (rb.velocity.magnitude > 0)
+
+        if (rb.velocity.magnitude > 1f)
         {
             if (!aSource.isPlaying)
             {
+                aSource.volume = Random.Range(minVolume, maxVolume);
+                aSource.pitch = Random.Range(minPitch, maxPitch);
                 aSource.Play();
                 //Debug.Log("audio");
             }
-        }
-        else
-        {
-            aSource.Stop();
         }
     }
 

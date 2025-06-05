@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 3342782830138170538}
   - component: {fileID: 180690214239693775}
   - component: {fileID: 2863499629289244188}
+  - component: {fileID: 9129803027453850415}
   m_Layer: 5
   m_Name: Number-3
   m_TagString: Untagged
@@ -475,19 +476,52 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 180690214239693775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2887676937817532011}
-        m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
-        m_MethodName: UpdateNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &9129803027453850415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274477354484732563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: GetMousePosition
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: CheckIfLeftOrRight
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2616006024940290544
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +534,7 @@ GameObject:
   - component: {fileID: 4926719121043572903}
   - component: {fileID: 4240761202235659326}
   - component: {fileID: 7909452818607305399}
+  - component: {fileID: 9121050370355385590}
   m_Layer: 5
   m_Name: Number-4
   m_TagString: Untagged
@@ -609,19 +644,52 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4240761202235659326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2887676937817532011}
-        m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
-        m_MethodName: UpdateNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &9121050370355385590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616006024940290544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: GetMousePosition
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: CheckIfLeftOrRight
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2737309058646974185
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +836,7 @@ GameObject:
   - component: {fileID: 2909813516145370422}
   - component: {fileID: 7370069307383194306}
   - component: {fileID: 979011836632880680}
+  - component: {fileID: 4086933292861980188}
   m_Layer: 5
   m_Name: Number-1
   m_TagString: Untagged
@@ -877,19 +946,52 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7370069307383194306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2887676937817532011}
-        m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
-        m_MethodName: UpdateNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &4086933292861980188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992712443196940262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: GetMousePosition
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: CheckIfLeftOrRight
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3952666877450231196
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +1004,7 @@ GameObject:
   - component: {fileID: 2809794547093910435}
   - component: {fileID: 5265954029505646474}
   - component: {fileID: 2960620651096818970}
+  - component: {fileID: 8681477267167135470}
   m_Layer: 5
   m_Name: Number-2
   m_TagString: Untagged
@@ -1011,19 +1114,52 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5265954029505646474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2887676937817532011}
-        m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
-        m_MethodName: UpdateNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &8681477267167135470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952666877450231196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: GetMousePosition
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2887676937817532011}
+          m_TargetAssemblyTypeName: ScrollingLock, Assembly-CSharp
+          m_MethodName: CheckIfLeftOrRight
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4391860639103708764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1356,9 @@ MonoBehaviour:
   sequence: 00000000000000000000000000000000
   numText: []
   parentObj: {fileID: 0}
+  test: 0
+  startingMousePosition: {x: 0, y: 0, z: 0}
+  currentMousePosition: {x: 0, y: 0, z: 0}
 --- !u!82 &3953892435125805536
 AudioSource:
   m_ObjectHideFlags: 0
