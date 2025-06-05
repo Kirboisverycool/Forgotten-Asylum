@@ -122,7 +122,7 @@ public class Door : MonoBehaviour
                         if (roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().DoorID == doorToArrive)
                         {
                             FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
-                            
+                            roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().StartDelayRoutine();
                             GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(true);
                             canUse = true;
                         }
@@ -134,6 +134,19 @@ public class Door : MonoBehaviour
 
             }
         }
+    }
+    public void StartDelayRoutine()
+    {
+        StartCoroutine(LoadCoolDown());
+    }
+    IEnumerator LoadCoolDown()
+    {
+        Debug.Log(gameObject);
+        Debug.Log(" coolDown");
+        canUse = false;
+        yield return new WaitForSeconds(2);
+        canUse = true;
+        Debug.Log(" coolDownOver");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

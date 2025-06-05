@@ -34,11 +34,11 @@ public class RotateMirrors : MonoBehaviour
     {
         if (inRange && Input.GetKey(KeyCode.E))
         {
-           
-            if (RayCheck())
-            {
-                puzzleParent.CheckForCorrect();
-            }
+
+
+            RayCheck();
+            puzzleParent.CheckForCorrect();
+            
           
           //  Debug.Log(gameObject.transform.eulerAngles.z);
 
@@ -54,7 +54,7 @@ public class RotateMirrors : MonoBehaviour
 
 
     }
-    private bool RayCheck()
+    private void RayCheck()
     {
         Vector2 origin = rayCastOrigin.transform.position;
         Vector2 direction = ((Vector2)raycastAim.transform.position - origin).normalized;
@@ -68,18 +68,27 @@ public class RotateMirrors : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
+          
 
             if (hit.collider.gameObject == target.transform.GetChild(0).gameObject)
             {
-                Debug.LogWarning("HitCorrect!");
+             
                 isInRotationRange = true;
-                return true;
+                return;
+            }
+            else
+            {
+                isInRotationRange = false;
+                return;
             }
         }
+        else
+        {
+            isInRotationRange = false;
+            return;
+        }
 
-        isInRotationRange = false;
-        return false;
+
     }
     IEnumerator addRotation()
     {

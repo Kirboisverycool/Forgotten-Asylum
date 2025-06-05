@@ -12,14 +12,34 @@ public class MirrorPuzzle : MonoBehaviour
         {
             if (mirrors[i].isInRotationRange)
             {
-                mirrors[i + 1].reflectionLight.SetActive(true);
+                if (i + 1 > mirrors.Count)
+                {
+                    Debug.Log("FinishedMirrorPuzzle");
+                }
+                else
+                {
+                    mirrors[i + 1].reflectionLight.SetActive(true);
+                }
+              
             }
             else
             {
+                Debug.Log("Negative");
                 for (int j = i; j < mirrors.Count; j++)
-                { 
-                
+                {
+                    if (j + 1 > mirrors.Count)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Debug.Log("SetLightFalse" + j + "," + i + mirrors[j + 1].gameObject);
+                        mirrors[j + 1].reflectionLight.SetActive(false);
+                        
+                    }
+                   
                 }
+                return;
                
             }
 
