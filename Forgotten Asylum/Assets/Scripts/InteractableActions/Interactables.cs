@@ -18,9 +18,10 @@ public class Interactables : MonoBehaviour
 
 
 
+
     private void Update() 
     {
-        if (Input.GetKeyDown(interactKey) && isNearest)
+        if (Input.GetKeyDown(interactKey) && isNearest && FindObjectOfType<EscapeMenu>().isPaused == false)
         {
             Debug.Log("Interact");
             objectToTrigger.SetActive(true);
