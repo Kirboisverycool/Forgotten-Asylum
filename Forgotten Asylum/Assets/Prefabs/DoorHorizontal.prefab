@@ -132,7 +132,7 @@ MonoBehaviour:
   unlockAudio: {fileID: 8300000, guid: 9562860d4aab9cd45bb4ae6ca6cad49f, type: 3}
   isScrollLocked: 0
   UILock: {fileID: 0}
-  sequenceCode: 
+  sequenceCode: 00000000000000000000000000000000
   ScrollLockedInstructions: 
   keyboardKey: 102
   text: {fileID: 8656385731564786006}

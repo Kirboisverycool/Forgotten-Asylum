@@ -30,8 +30,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5830870623430230054}
   - {fileID: 4109702770810652116}
+  - {fileID: 5830870623430230054}
   m_Father: {fileID: 6800437331905687744}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6800437331905687744}
   - component: {fileID: 8901603135092833408}
+  - component: {fileID: 4734619982541923049}
   m_Layer: 5
   m_Name: Journal
   m_TagString: UiPopUp
@@ -128,6 +129,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec32b87025a5cd4682eb8f1adf0d744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4734619982541923049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3965357583570177524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184b60e1815bf6143bd7151345b1aed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintText: {fileID: 0}
+  hint: The code for the kitchen door is
 --- !u!1 &4031084608449525655
 GameObject:
   m_ObjectHideFlags: 0

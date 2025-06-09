@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class Door : MonoBehaviour
 {
-   
-
     public bool isInRange;
 
     [Header("Locked")]
@@ -22,6 +20,7 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject UILock;
     [SerializeField] public List<int> sequenceCode;
     [SerializeField] string ScrollLockedInstructions;
+    RandomNumberManager randomNumberManager;
 
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
@@ -38,6 +37,11 @@ public class Door : MonoBehaviour
   
     public bool canUse = true;
 
+    private void Awake()
+    {
+        randomNumberManager = FindObjectOfType<RandomNumberManager>();
+    }
+
     void Start()
     {
         normalInstructions = instructionText.text;
@@ -52,6 +56,11 @@ public class Door : MonoBehaviour
             instructionText.text = ScrollLockedInstructions;
         }
         text.SetActive(false);
+
+        for (int i = 0; i < sequenceCode.Count; i++)
+        {
+            sequenceCode[i] = randomNumberManager.scrollingLockCode[i];
+        }
     }
 
     // Update is called once per frame
@@ -65,9 +74,6 @@ public class Door : MonoBehaviour
                 {
                     openDoor();
                 }
-
-               
-
             }
             else if (isLockedDoor)
             {
@@ -77,12 +83,10 @@ public class Door : MonoBehaviour
                     instructionText.text = normalInstructions;
                     AudioSource.PlayClipAtPoint(unlockAudio, transform.position);
                     isLockedDoor = false;
-                    
                 }
             }
             else if (isScrollLocked)
             {
-              
                 var uiLock = Instantiate(UILock, GameObject.FindWithTag("MainCanvas").transform);
                 uiLock.GetComponent<ScrollingLock>().correctSequence = sequenceCode;
                 uiLock.GetComponent<ScrollingLock>().parentObj = gameObject;
@@ -127,11 +131,9 @@ public class Door : MonoBehaviour
                             canUse = true;
                         }
                     }
-              
                 }
             
                 yield return null;
-
             }
         }
     }
@@ -164,6 +166,5 @@ public class Door : MonoBehaviour
             isInRange = false;
             text.SetActive(false);
         }
-    
     }
 }

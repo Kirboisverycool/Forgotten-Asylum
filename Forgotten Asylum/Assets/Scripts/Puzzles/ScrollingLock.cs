@@ -44,7 +44,6 @@ public class ScrollingLock : MonoBehaviour
         {
             startingMousePosition.x = Input.mousePosition.x;
         }
-
     }
 
     public void GetMousePosition()
@@ -64,12 +63,10 @@ public class ScrollingLock : MonoBehaviour
             if (test >= 0)
             {
                 UpdateNumber(index);
-                //Debug.Log("Right");
             }
             if (test < 0)
             {
                 UpdateNegativeNumber(index);
-                //Debug.Log("Left");
             }
         }
     }

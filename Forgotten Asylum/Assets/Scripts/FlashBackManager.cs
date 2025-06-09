@@ -22,13 +22,6 @@ public class FlashBackManager : MonoBehaviour
     [SerializeField] Image circleFill;
     [SerializeField] TextMeshProUGUI TimeleftText;
     
-   
-    // NEW SYSTEM
-    // Cache the two past and present scenes
-    // activate / deactivate as normal
-    //on a door  open recache the scenes
-    // Then trigger them to make sure the right version is active
-    // function for re assgining the scenes, then at the end check id in past, and then if yes then run a new custom past sequence only switching the scene
     public bool isInPast;
     float timeSinceArrived;
 

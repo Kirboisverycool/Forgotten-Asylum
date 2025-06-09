@@ -12,10 +12,6 @@ public class PlayerMouvement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 movementInputs;
 
-/*    [Header("Puzzle")]
-    [SerializeField] bool isDoingPuzzle = false;
-    [SerializeField] GameObject[] puzzles;*/
-
     [Header("Speeds")]
     [SerializeField] float movementSpeed;
     [SerializeField] float sprintMultiplier = 1f;
@@ -57,9 +53,6 @@ public class PlayerMouvement : MonoBehaviour
         Application.targetFrameRate = -1;
         QualitySettings.vSyncCount = 0;
 
-
-     
-
         anim = GetComponent<Animator>();
         aSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
@@ -69,17 +62,10 @@ public class PlayerMouvement : MonoBehaviour
  
     void Update()
     {
-
-
-/*        if (!isDoingPuzzle)
-        {*/
-            MouvementInputs();
-            Sprint();
-            MoveAudio();
-            Animate();
-        //}
-
-        //StopIfDoingPuzzle();
+        MouvementInputs();
+        Sprint();
+        MoveAudio();
+        Animate();
 
         Mathf.Clamp(stamina, 0, 100);
 
@@ -142,10 +128,7 @@ public class PlayerMouvement : MonoBehaviour
 
     private void FixedUpdate()
     {
-/*        if (!isDoingPuzzle)
-        {*/
-            Move();
-        //}
+        Move();
     }
 
     private void Sprint()
