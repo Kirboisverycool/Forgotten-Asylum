@@ -54,13 +54,12 @@ public class Door : MonoBehaviour
         {
             instructionText.color = Color.red;
             instructionText.text = ScrollLockedInstructions;
+            for (int i = 0; i < sequenceCode.Count; i++)
+            {
+                sequenceCode[i] = randomNumberManager.scrollingLockCode[i];
+            }
         }
         text.SetActive(false);
-
-        for (int i = 0; i < sequenceCode.Count; i++)
-        {
-            sequenceCode[i] = randomNumberManager.scrollingLockCode[i];
-        }
     }
 
     // Update is called once per frame
