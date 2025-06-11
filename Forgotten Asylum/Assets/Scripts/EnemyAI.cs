@@ -35,8 +35,13 @@ public class EnemyAI : MonoBehaviour
     [Header("Target Location")]
     [SerializeField] float updatePathTime;
 
+    [Header("Animations")]
+    Animator anim;
+    Vector2 isMoving;
+
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -50,7 +55,10 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        isMoving = rb.velocity;
         FlipSprite();
+
+        Animate();
 
         UpdatePath();
 
@@ -66,6 +74,12 @@ public class EnemyAI : MonoBehaviour
                 StartCoroutine(Attack());
             }
         }
+    }
+
+    private void Animate()
+    {
+        anim.SetFloat("Speed", isMoving.sqrMagnitude);
+        anim.SetBool("IsCharging", isAttacking);
     }
 
     private void FlipSprite()
