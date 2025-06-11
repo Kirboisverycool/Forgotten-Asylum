@@ -42,7 +42,7 @@ public class LightFlicker : MonoBehaviour
         {
             // flicker();
             timer += Time.deltaTime;
-            Debug.Log(timer);
+          
             if (timer > interval)
             {
                 if (myLight.intensity == 0)
@@ -55,7 +55,7 @@ public class LightFlicker : MonoBehaviour
                 }
                 timer = 0;
                 interval = Random.Range(0, maxInterval);
-                Debug.Log(maxInterval);
+            
 
             }
         }
@@ -77,7 +77,7 @@ public class LightFlicker : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime) ;
         canFlicker = !canFlicker;
-        Debug.Log("LightFlickerStatus: " + canFlicker);
+        
         StartCoroutine(WaitToggle());
     }
 }

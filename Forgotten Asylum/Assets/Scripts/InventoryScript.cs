@@ -109,6 +109,28 @@ public class InventoryScript : MonoBehaviour
         }
        
     }
+    public void RemoveFromInventory()
+    {
+        inventoryItemList.RemoveAt(selectedSlot);
+        inventoryUI[selectedSlot].transform.GetChild(0).GetComponent<Image>().sprite = null;
+       inventoryUI[selectedSlot].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(false);
+        NameTextUpdate();
+        ReAdjustInventory();
+    }
+    private void ReAdjustInventory()
+    {
+        int uiSlot = 0;
+        foreach (var ObjData in inventoryItemList) 
+        {
+            inventoryUI[uiSlot].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
+            inventoryUI[uiSlot].transform.GetChild(0).GetComponent<Image>().sprite = ObjData.hotbarImage;
+            uiSlot++;
+        }
+        for(int i = 0; i < inventoryUI.Count; i ++)
+        {
+            inventoryUI[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(false);
+        }
+    }
     public bool AddToInventory(ObjectData data)
     {
         if (inventoryItemList.Count < inventoryGrid.transform.childCount)

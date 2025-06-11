@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] List<string> itemNames;
+    [SerializeField] List<GameObject> piece;
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        string itemInHand = FindObjectOfType<InventoryScript>().HasItemInHand();
+        for (int i = 0; i < itemNames.Count; i++)
+        {
+            if (itemInHand == itemNames[i])
+            {
+                piece[i].GetComponent<SpriteRenderer>().color = Color.white;
+                Debug.Log(itemInHand);
+                FindObjectOfType<InventoryScript>().RemoveFromInventory();
+
+            }
+        }
+        gameObject.SetActive(false);
+
+        Debug.LogWarning("Broken");
+        gameObject.SetActive(false);
     }
 }
