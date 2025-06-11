@@ -63,10 +63,9 @@ public class Piano : MonoBehaviour
         finishedPuzzle = true;
         codeText.Clear();
         CloseTab();
-        //DoActionFromCode
     }
     public void CloseTab()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class InventoryScript : MonoBehaviour
 {
     [SerializeField] List<ObjectData> inventoryItemList;
@@ -13,6 +15,8 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] GameObject selectorUi;
 
     [SerializeField] int ammountOfSlots;
+    [SerializeField] KeyCode[] inputs;
+
     private void Awake()
     {
         ammountOfSlots = inventoryGrid.transform.childCount;
@@ -32,7 +36,21 @@ public class InventoryScript : MonoBehaviour
     private void Update()
     {
         UpdateSelectedSlot();
+        UpdateSlotWithNumbers();
     }
+
+    private void UpdateSlotWithNumbers()
+    {
+        for(int input = 0; input < inputs.Length; input++)
+        {
+            if (Input.GetKeyDown(inputs[input]))
+            {
+                selectedSlot = input;
+                break;
+            }
+        }
+    }
+
     private void UpdateSelectedSlot()
     {
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
