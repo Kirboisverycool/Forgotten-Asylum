@@ -126,7 +126,7 @@ public class InventoryScript : MonoBehaviour
             inventoryUI[uiSlot].transform.GetChild(0).GetComponent<Image>().sprite = ObjData.hotbarImage;
             uiSlot++;
         }
-        for(int i = 0; i < inventoryUI.Count; i ++)
+        for(int i = inventoryItemList.Count; i < inventoryUI.Count; i ++)
         {
             inventoryUI[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(false);
         }
