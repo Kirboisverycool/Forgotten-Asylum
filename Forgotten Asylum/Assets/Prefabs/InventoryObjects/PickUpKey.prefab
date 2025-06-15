@@ -457,7 +457,7 @@ Transform:
   - {fileID: 8735281427468263571}
   - {fileID: 404583712623590864}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1987707483537712253
 SpriteRenderer:
@@ -528,8 +528,8 @@ MonoBehaviour:
   interactKey: 101
   objectToTrigger: {fileID: 647939985252937627}
   isNearest: 0
-  sRenderer: {fileID: 0}
-  highlitedVerison: {fileID: 0}
+  sRenderer: {fileID: 1987707483537712253}
+  highlitedVerison: {fileID: 21300000, guid: d3d59ad293064c540b64c00f394dd6ea, type: 3}
 --- !u!58 &3665900299594422587
 CircleCollider2D:
   m_ObjectHideFlags: 0

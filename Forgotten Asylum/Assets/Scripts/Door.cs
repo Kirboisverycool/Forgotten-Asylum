@@ -19,8 +19,14 @@ public class Door : MonoBehaviour
     [SerializeField] bool isScrollLocked;
     [SerializeField] GameObject UILock;
     [SerializeField] public List<int> sequenceCode;
-    [SerializeField] string ScrollLockedInstructions;
+    [SerializeField] string scrollLockedInstructions;
     RandomNumberManager randomNumberManager;
+
+    [Header("Paint Scroll Lock")]
+    [SerializeField] bool isPaintScrollLocked;
+    [SerializeField] GameObject paintUILock;
+    [SerializeField] public List<int> paintSequenceCode;
+    [SerializeField] string paintScrollLockedInstructions;
 
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
@@ -53,11 +59,16 @@ public class Door : MonoBehaviour
         if (isScrollLocked)
         {
             instructionText.color = Color.red;
-            instructionText.text = ScrollLockedInstructions;
+            instructionText.text = scrollLockedInstructions;
             for (int i = 0; i < sequenceCode.Count; i++)
             {
                 sequenceCode[i] = randomNumberManager.scrollingLockCode[i];
             }
+        }
+        if (isPaintScrollLocked)
+        {
+            instructionText.color = Color.red;
+            instructionText.text = paintScrollLockedInstructions;
         }
         text.SetActive(false);
     }
@@ -67,7 +78,7 @@ public class Door : MonoBehaviour
     {
         if (isInRange && Input.GetKeyDown(keyboardKey))
         {
-            if (!isLockedDoor && !isScrollLocked)
+            if (!isLockedDoor && !isScrollLocked && !isPaintScrollLocked)
             {
                 if (canUse)
                 {
@@ -78,6 +89,7 @@ public class Door : MonoBehaviour
             {
                 if (FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
                 {
+                    FindAnyObjectByType<InventoryScript>().RemoveFromInventory();
                     instructionText.color = Color.white;
                     instructionText.text = normalInstructions;
                     AudioSource.PlayClipAtPoint(unlockAudio, transform.position);
@@ -89,7 +101,13 @@ public class Door : MonoBehaviour
                 var uiLock = Instantiate(UILock, GameObject.FindWithTag("MainCanvas").transform);
                 uiLock.GetComponent<ScrollingLock>().correctSequence = sequenceCode;
                 uiLock.GetComponent<ScrollingLock>().parentObj = gameObject;
-            }   
+            }
+            else if (isPaintScrollLocked)
+            {
+                var paintuiLock = Instantiate(paintUILock, GameObject.FindWithTag("MainCanvas").transform);
+                paintuiLock.GetComponent<ScrollingLock>().correctSequence = paintSequenceCode;
+                paintuiLock.GetComponent<ScrollingLock>().parentObj = gameObject;
+            }
         }
 
 
@@ -97,12 +115,12 @@ public class Door : MonoBehaviour
     public void UnscrollLock()
     {
         isScrollLocked = false;
+        isPaintScrollLocked = false;
         instructionText.color = Color.white;
         instructionText.text = normalInstructions;
     }
     public void openDoor()
     {
-        
         canUse = false;
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
         StartCoroutine(DelayLoad());
