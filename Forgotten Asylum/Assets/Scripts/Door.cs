@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 public class Door : MonoBehaviour
 {
     public bool isInRange;
@@ -27,6 +28,9 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject paintUILock;
     [SerializeField] public List<int> paintSequenceCode;
     [SerializeField] string paintScrollLockedInstructions;
+
+    [Header("Past Door")]
+    [SerializeField] bool isPastDoor = false;
 
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
@@ -76,13 +80,19 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPastDoor)
+        {
+            PastDoor();
+            isLockedDoor = !FindObjectOfType<FlashBackManager>().isInPast;
+        }
+
         if (isInRange && Input.GetKeyDown(keyboardKey))
         {
             if (!isLockedDoor && !isScrollLocked && !isPaintScrollLocked)
             {
                 if (canUse)
                 {
-                    openDoor();
+                    OpenDoor();
                 }
             }
             else if (isLockedDoor)
@@ -109,9 +119,22 @@ public class Door : MonoBehaviour
                 paintuiLock.GetComponent<ScrollingLock>().parentObj = gameObject;
             }
         }
-
-
     }
+
+    private void PastDoor()
+    {
+        if (isPastDoor && !isLockedDoor)
+        {
+            instructionText.color = Color.white;
+            instructionText.text = normalInstructions;
+        }
+        else if (isPastDoor && isLockedDoor)
+        {
+            instructionText.color = Color.red;
+            instructionText.text = lockedInstructions;
+        }
+    }
+
     public void UnscrollLock()
     {
         isScrollLocked = false;
@@ -119,7 +142,7 @@ public class Door : MonoBehaviour
         instructionText.color = Color.white;
         instructionText.text = normalInstructions;
     }
-    public void openDoor()
+    public void OpenDoor()
     {
         canUse = false;
         GameObject.FindWithTag("Fader").GetComponent<Animator>().SetTrigger("Fadeout");
@@ -130,7 +153,7 @@ public class Door : MonoBehaviour
         AudioSource.PlayClipAtPoint(doorSound, transform.position);
         GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSeconds(delayTime);
-        Rooms roomList =FindObjectOfType<Rooms>();
+        Rooms roomList = FindObjectOfType<Rooms>();
         for (int i = 0; i < roomList.roomParents.Count; i++)
         {
             if (roomList.roomParents[i].name == roomNameToGo)
