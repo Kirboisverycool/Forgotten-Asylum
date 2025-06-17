@@ -31,6 +31,7 @@ public class Door : MonoBehaviour
 
     [Header("Past Door")]
     [SerializeField] bool isPastDoor = false;
+   
 
     [Header("Chase End Door")]
     [SerializeField] bool isChaseEndDoor = false;
@@ -96,6 +97,7 @@ public class Door : MonoBehaviour
             isLockedDoor = !FindObjectOfType<FlashBackManager>().isInPast;
         }
 
+
         if (isInRange && Input.GetKeyDown(keyboardKey))
         {
             if (!isLockedDoor && !isScrollLocked && !isPaintScrollLocked)
@@ -144,6 +146,7 @@ public class Door : MonoBehaviour
             instructionText.text = lockedInstructions;
         }
     }
+
 
     public void UnscrollLock()
     {

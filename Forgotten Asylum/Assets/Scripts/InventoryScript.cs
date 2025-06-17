@@ -99,7 +99,10 @@ public class InventoryScript : MonoBehaviour
 
     public string HasItemInHand()
     {
-        if (inventoryItemList[selectedSlot] != null)
+        if (inventoryItemList != null &&
+       selectedSlot >= 0 &&
+       selectedSlot < inventoryItemList.Count &&
+       inventoryItemList[selectedSlot] != null)
         {
             return inventoryItemList[selectedSlot].objectName;
         }
@@ -107,7 +110,7 @@ public class InventoryScript : MonoBehaviour
         {
             return null;
         }
-       
+
     }
     public void RemoveFromInventory()
     {

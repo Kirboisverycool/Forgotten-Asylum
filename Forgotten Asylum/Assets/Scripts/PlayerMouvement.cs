@@ -81,6 +81,8 @@ public class PlayerMouvement : MonoBehaviour
         {
             staminaBar.SetActive(false);
         }
+
+   
     }
 
 /*    private void StopIfDoingPuzzle()
@@ -118,11 +120,15 @@ public class PlayerMouvement : MonoBehaviour
         {
             if (!aSource.isPlaying)
             {
-                aSource.volume = Random.Range(minVolume, maxVolume);
-                aSource.pitch = Random.Range(minPitch, maxPitch);
+                // aSource.volume = Random.Range(minVolume, maxVolume);
+                //aSource.pitch = Random.Range(minPitch, maxPitch);
                 aSource.Play();
                 //Debug.Log("audio");
             }
+        }
+        else
+        { 
+            aSource.Pause();
         }
     }
 
@@ -141,6 +147,7 @@ public class PlayerMouvement : MonoBehaviour
             {   
                 StartCoroutine(RemoveStamina());
             }
+
         } 
         else 
         { 

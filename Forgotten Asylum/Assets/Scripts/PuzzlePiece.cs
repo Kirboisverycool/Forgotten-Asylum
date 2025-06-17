@@ -22,7 +22,7 @@ public class PuzzlePiece : MonoBehaviour
         }
         gameObject.SetActive(false);
 
-        Debug.LogWarning("Broken");
+        //Debug.LogWarning("Broken");
         gameObject.SetActive(false);
     }
 }

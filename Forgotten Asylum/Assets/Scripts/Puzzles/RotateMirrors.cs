@@ -15,6 +15,10 @@ public class RotateMirrors : MonoBehaviour
 
     [SerializeField] Color wrongColor;
     [SerializeField] Color correctColor;
+
+    [SerializeField] AudioClip audioRotate;
+
+    bool firstRun = true;
     private void Start()
     {
         mirrorRenderer.sprite = mirrorSprites[currentIndex];
@@ -25,8 +29,11 @@ public class RotateMirrors : MonoBehaviour
     }
     private void OnEnable()
     {
-       
-       
+        if (!firstRun)
+        {
+            AudioSource.PlayClipAtPoint(audioRotate, transform.position);
+        }
+       firstRun = false;
         if (currentIndex + 2 > mirrorSprites.Count)
         {
             currentIndex = 0;
