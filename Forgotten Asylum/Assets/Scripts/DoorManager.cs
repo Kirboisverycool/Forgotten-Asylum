@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField] Door[] doors;
+    [SerializeField] public Door[] doors;
 
     // Start is called before the first frame update
     void Start()

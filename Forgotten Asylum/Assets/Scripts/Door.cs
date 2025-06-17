@@ -32,6 +32,10 @@ public class Door : MonoBehaviour
     [Header("Past Door")]
     [SerializeField] bool isPastDoor = false;
 
+    [Header("Chase End Door")]
+    [SerializeField] bool isChaseEndDoor = false;
+    public GameObject enemyAI;
+
     [Header("Other")]
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject text;
@@ -46,6 +50,7 @@ public class Door : MonoBehaviour
     [SerializeField] public GameObject spawnPoint;
   
     public bool canUse = true;
+    public bool isChasing = true;
 
     private void Awake()
     {
@@ -80,6 +85,11 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(enemyAI == null)
+        {
+            enemyAI = GameObject.FindGameObjectWithTag("Enemy");
+        }
+
         if (isPastDoor)
         {
             PastDoor();
@@ -152,6 +162,11 @@ public class Door : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(doorSound, transform.position);
         GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(false);
+        if(enemyAI != null)
+        {
+            enemyAI.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            enemyAI.GetComponent<EnemyAI>().enabled = false;
+        }
         yield return new WaitForSeconds(delayTime);
         Rooms roomList = FindObjectOfType<Rooms>();
         for (int i = 0; i < roomList.roomParents.Count; i++)
@@ -168,6 +183,14 @@ public class Door : MonoBehaviour
                             FindObjectOfType<PlayerMouvement>().transform.position = roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().spawnPoint.transform.position;
                             roomList.roomParents[i].transform.GetChild(j).GetComponent<Door>().StartDelayRoutine();
                             GameObject.FindGameObjectWithTag("VirtualCamera").transform.GetChild(0).gameObject.SetActive(true);
+                            if (enemyAI != null && !isChaseEndDoor)
+                            {
+                                enemyAI.GetComponent<EnemyAI>().enabled = true;
+                            }
+                            else if(enemyAI != null && isChaseEndDoor)
+                            {
+                                enemyAI.SetActive(false);
+                            }
                             canUse = true;
                         }
                     }

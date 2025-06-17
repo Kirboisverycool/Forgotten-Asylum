@@ -1,9 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
+using UnityEngine.Rendering;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -30,7 +32,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
 
     [Header("Movement")]
-    [SerializeField] float speed;
+    [SerializeField] float currentSpeed;
+    [SerializeField] float minSpeed;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float slowDownTimer;
 
     [Header("Target Location")]
     [SerializeField] float updatePathTime;
@@ -39,8 +44,17 @@ public class EnemyAI : MonoBehaviour
     Animator anim;
     Vector2 isMoving;
 
+    [Header("Audio")]
+    [SerializeField] float minVolume;
+    [SerializeField] float maxVolume;
+    [SerializeField] float minPitch;
+    [SerializeField] float maxPitch;
+    [SerializeField] AudioSource aSource;
+
     private void Start()
     {
+        currentSpeed = maxSpeed;
+
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -55,6 +69,14 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!aSource.isPlaying)
+        {
+            aSource.volume = Random.Range(minVolume, maxVolume);
+            aSource.pitch = Random.Range(minPitch, maxPitch);
+            aSource.Play();
+            //Debug.Log("audio");
+        }
+
         isMoving = rb.velocity;
         FlipSprite();
 
@@ -69,11 +91,22 @@ public class EnemyAI : MonoBehaviour
 
         if(PlayerInSight())
         {
-            if(!isAttacking && cooldownTimer >= attackCooldown)
+            currentSpeed = minSpeed;
+/*            if(!isAttacking && cooldownTimer >= attackCooldown)
             {
                 StartCoroutine(Attack());
-            }
+            }*/
         }
+        else if(!PlayerInSight() && currentSpeed == minSpeed)
+        {
+            StartCoroutine(SpeedUp());
+        }
+    }
+
+    private IEnumerator SpeedUp()
+    {
+        yield return new WaitForSeconds(slowDownTimer);
+        currentSpeed = maxSpeed;
     }
 
     private void Animate()
@@ -123,7 +156,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (!isAttacking)
         {
-            rb.velocity = new Vector2(moveDir.x, moveDir.y) * speed;
+            rb.velocity = new Vector2(moveDir.x, moveDir.y) * currentSpeed;
         }
     }
 
