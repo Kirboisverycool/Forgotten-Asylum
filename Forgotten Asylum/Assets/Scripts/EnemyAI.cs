@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Unity.VisualScripting.Member;
 using UnityEngine.Rendering;
 
@@ -177,7 +178,6 @@ public class EnemyAI : MonoBehaviour
 
     private void Jumpscare()
     {
-        //play jumpscare
-        Debug.Log("play jumpscare");
+        SceneManager.LoadScene(3);
     }
 }
