@@ -9,7 +9,8 @@ public class WoodPanels : MonoBehaviour
     [SerializeField] KeyCode keyboardKey;
     [SerializeField] GameObject doorObject;
     [SerializeField] string unlockedItemName;
-    [SerializeField] AudioClip woodBreakSound;
+    [SerializeField] AudioClip BreakSound;
+    [SerializeField] Sprite brokenImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +25,11 @@ public class WoodPanels : MonoBehaviour
             if(FindObjectOfType<InventoryScript>().HasItemInHand() == unlockedItemName)
             {
                 FindAnyObjectByType<InventoryScript>().RemoveFromInventory();
-                AudioSource.PlayClipAtPoint(woodBreakSound, transform.position);
-                doorObject.SetActive(true);     
-                Destroy(gameObject);
+                AudioSource.PlayClipAtPoint(BreakSound, transform.position);
+                doorObject.SetActive(true);
+                GetComponent<SpriteRenderer>().sprite = brokenImage;
+                Destroy(text);
+                Destroy(this);
 
 
             }

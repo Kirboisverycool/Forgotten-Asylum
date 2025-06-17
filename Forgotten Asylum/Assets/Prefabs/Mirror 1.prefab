@@ -57,8 +57,10 @@ MonoBehaviour:
   currentIndex: 0
   mirrorRenderer: {fileID: 4184646479800453226}
   lightObj: {fileID: 5264419739198194944}
-  correctePosition: 0
+  correctePosition: 2
   isCorrect: 0
+  wrongColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+  correctColor: {r: 0.5990566, g: 0.89969015, b: 1, a: 1}
 --- !u!1 &2755396841525855733
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +422,7 @@ MonoBehaviour:
   - {x: 0.34389257, y: -0.28159273, z: 0}
   m_ShapePathHash: 1798391141
   m_Mesh: {fileID: 0}
-  m_InstanceId: -181482
+  m_InstanceId: -4068
   m_LocalBounds:
     m_Center: {x: 0.037824154, y: -0.021993577, z: 0}
     m_Extent: {x: 0.30606842, y: 0.30260235, z: 0}
@@ -472,7 +474,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7877358, g: 0.8269202, b: 1, a: 1}
   m_Intensity: 2.73
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
