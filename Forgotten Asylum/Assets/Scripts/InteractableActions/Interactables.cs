@@ -16,6 +16,7 @@ public class Interactables : MonoBehaviour
     Sprite normalVersion;
     [SerializeField] Sprite highlitedVerison;
 
+    bool isOnCoolDown = false;
 
 
 
@@ -23,9 +24,20 @@ public class Interactables : MonoBehaviour
     {
         if (Input.GetKeyDown(interactKey) && isNearest && FindObjectOfType<EscapeMenu>().isPaused == false)
         {
-            Debug.Log("Interact");
-            objectToTrigger.SetActive(true);
+            if (!isOnCoolDown)
+            {
+                Debug.Log("Interact");
+                objectToTrigger.SetActive(true);
+                StartCoroutine(WaitForNextInteract());
+            }
+      
         }
+    }
+    IEnumerator WaitForNextInteract()
+    {
+        isOnCoolDown = true;
+        yield return new WaitForSeconds(0.1f);
+        isOnCoolDown = false;
     }
     void Start()
     {
