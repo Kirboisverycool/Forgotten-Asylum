@@ -27,6 +27,7 @@ public class UiPopOut : MonoBehaviour
             uiIrl.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform, false);
             player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             player.GetComponent<PlayerMouvement>().enabled = false;
+            player.GetComponent<AudioSource>().Pause();
             gameObject.SetActive(false);
             return;
         }

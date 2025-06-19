@@ -16,6 +16,7 @@ public class Interactables : MonoBehaviour
     Sprite normalVersion;
     [SerializeField] Sprite highlitedVerison;
 
+    bool usesCooldown = false;
     bool isOnCoolDown = false;
 
 
@@ -28,7 +29,11 @@ public class Interactables : MonoBehaviour
             {
                 Debug.Log("Interact");
                 objectToTrigger.SetActive(true);
-                StartCoroutine(WaitForNextInteract());
+                if (usesCooldown)
+                {
+                    StartCoroutine(WaitForNextInteract());
+                }
+               
             }
       
         }
